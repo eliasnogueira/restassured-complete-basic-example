@@ -1,6 +1,9 @@
 # Combined Credit Test API
+
+Don't forget to give this project a ⭐
+
 This project was created to start the initial steps with test automation for a REST API using RestAssured.
-It tests [combined-credit-api](https://github.com/eliasnogueira/combined-credit-api)
+It tests the API: [combined-credit-api](https://github.com/eliasnogueira/combined-credit-api)
 
 > :warning: **Disclaimer**
 > 
