@@ -1,4 +1,4 @@
-# Combined Credit Test API
+# Rest-Assured Complete Basic Example
 
 Don't forget to give this project a ⭐
 
@@ -10,9 +10,9 @@ It tests the API: [combined-credit-api](https://github.com/eliasnogueira/combine
 > This project has an educational objective and does not have the best practices that could be applied
 >
 > Some practices will help you to improve your test architecture, but the central point of this repository and 
-> demonstrate an example of running tests for api in a pipeline
+> demonstrate an example of running tests for API in a pipeline
 > some practices will help you to improve your test architecture, 
-> but the central point of this repository and demonstrate an example of running tests for api in a pipeline
+> but the central point of this repository and demonstrate an example of running tests for API in a pipeline
 
 # Required software
 * Java JDK 11+
@@ -21,17 +21,17 @@ It tests the API: [combined-credit-api](https://github.com/eliasnogueira/combine
 * Download the backend API [combined-credit-api](https://github.com/eliasnogueira/combined-credit-api)
 
 # How to execute the tests
-You can open each test classes on `src\test\java` and execute all of them, but I recommend you run it by the
+You can open each test class on `src\test\java` and execute all of them, but I recommend you run it by the
 command line. It enables us to run in different test execution strategies and also in a pipeline, that is the propose of this repo.
 
 ## Running the backend API
-Please, before execute any tests, run the backend API.
+Please, before executing any tests, run the backend API.
 After cloning this project:
 
 1. Navigate to the project folder using the Terminal / Command prompt
 2. Execute the following: `mvn spring-boot:run`
 3. Wait until you see something like this: Application has started! Happy tests!
-4. The API is ready and listen all requests on http://localhost:8088
+4. The API is ready and listen to all requests on http://localhost:8088
 
 ## About the environments
 You can run the tests simulation two environments: dev and test.
@@ -87,7 +87,7 @@ create the objects using the Builder pattern.
 In a few cases, there are custom data like:
  * the list of existent restrictions and simulations in the database
  * cpf generation
- * data generation returned by the api use
+ * data generation returned by the API use
 
 #### provider
 TestNG Data Provider class to reduce the amount of code and maintenance for the functional tests on `SimulationsFunctionalTest`
@@ -152,8 +152,6 @@ TestNG suites divided by a pipeline strategy
 * Builder
 * Request and Response Specification
 * Base Test
-
-
 
 # Do you want to help?
 Please read the [Contribution guide](CONTRIBUTING.md)
