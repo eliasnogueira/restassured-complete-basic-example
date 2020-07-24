@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="End to End Test suite" verbose="2">
+
+    <test name="Health Check">
+        <groups>
+            <run>
+                <include name="e2e" />
+            </run>
+        </groups>
+
+        <packages>
+            <package name="com.eliasnogueira.credit.*" />
+        </packages>
+    </test>
+</suite>

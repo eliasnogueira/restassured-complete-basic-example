@@ -1,0 +1,41 @@
+image: maven:latest
+
+stages:
+  - build
+  - health check
+  - contract
+  - e2e
+  - functional
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+
+cache:
+  paths:
+    - .m2/repository/
+    - target/
+
+build:
+  stage: build
+  script:
+    - mvn compile
+
+health check:
+  stage: health check
+  script:
+    - mvn test -Dsuite=health -Denvironment=test
+
+contrato:
+  stage: contract
+  script:
+    - mvn test -Dsuite=contract -Denvironment=test
+
+aceitacao:
+  stage: e2e
+  script:
+    - mvn test -Dsuite=e2e -Denvironment=test
+
+funcional:
+  stage: functional
+  script:
+    - mvn test -Dsuite=functional -Denvironment=test

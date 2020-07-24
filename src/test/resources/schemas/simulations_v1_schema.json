@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "name": {
+      "type": "string"
+    },
+    "cpf": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "number"
+    },
+    "installments": {
+      "type": "integer"
+    },
+    "insurance": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "cpf",
+    "email",
+    "amount",
+    "installments",
+    "insurance"
+  ],
+  "additionalProperties": false
+}

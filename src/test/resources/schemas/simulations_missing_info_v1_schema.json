@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "errors"
+  ],
+  "properties": {
+    "errors": {
+      "type": "object",
+      "required": [
+        "amount",
+        "installments",
+        "cpf",
+        "name",
+        "email"
+      ],
+      "properties": {
+        "amount": {
+          "type": "string"
+        },
+        "installments": {
+          "type": "string"
+        },
+        "cpf": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
