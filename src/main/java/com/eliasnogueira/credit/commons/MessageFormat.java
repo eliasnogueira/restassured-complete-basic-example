@@ -38,10 +38,13 @@ public class MessageFormat {
      * to make the requests, but should not be show in the URL
      */
     public static String locationURLByEnvironment() {
+        String locationURL;
         Configuration configuration = ConfigurationManager.getConfiguration();
 
-        String locationURL = java.text.MessageFormat.format("{0}:{1}{2}/simulations/", configuration.baseURI(),
-            String.valueOf(configuration.port()), configuration.basePath());
+        locationURL = configuration.port() < 8000 ? java.text.MessageFormat
+            .format("{0}{1}/simulations/", configuration.baseURI(), configuration.basePath())
+            : java.text.MessageFormat.format("{0}:{1}{2}/simulations/", configuration.baseURI(),
+                String.valueOf(configuration.port()), configuration.basePath());
 
         log.debug(locationURL);
         return locationURL;
