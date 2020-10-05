@@ -23,17 +23,19 @@
  */
 package com.eliasnogueira.credit.data.provider;
 
+import static org.junit.jupiter.params.provider.Arguments.*;
+
 import com.eliasnogueira.credit.data.factory.SimulationDataFactory;
 import com.eliasnogueira.credit.model.Simulation;
-import org.testng.annotations.DataProvider;
+import java.util.stream.Stream;
+import org.junit.jupiter.params.provider.Arguments;
 
 public class SimulationDataProvider {
 
     private SimulationDataProvider() {
     }
 
-    @DataProvider(name = "failSimulationValidations")
-    public static Object[][] failValidations() {
+    public static Stream<Arguments> failedValidations() {
         SimulationDataFactory simulationDataFactory = new SimulationDataFactory();
 
         Simulation simulationLessThanMinAmount = simulationDataFactory.simulationLessThanMinAmount();
@@ -44,15 +46,14 @@ public class SimulationDataProvider {
         Simulation simulationWithEmptyCPF = simulationDataFactory.simulationWithEmptyCPF();
         Simulation simulationWithEmptyName = simulationDataFactory.simulationWithEmptyName();
 
-        return new Object[][]{
-            {simulationLessThanMinAmount, "errors.amount", "Amount must be equal or greater than $ 1.000"},
-            {simulationExceedAmount, "errors.amount", "Amount must be equal or less than than $ 40.000"},
-            {simulationLessThanMinInstallments, "errors.installments", "Installments must be equal or greater than 2"},
-            {simulationExceedInstallments, "errors.installments", "Installments must be equal or less than 48"},
-            {simulationWithNotValidEmail, "errors.email", "must be a well-formed email address"},
-            {simulationWithEmptyCPF, "errors.cpf", "CPF cannot be empty"},
-            {simulationWithEmptyName, "errors.name", "Name cannot be empty"}
-        };
+        return Stream.of(
+            arguments(simulationLessThanMinAmount, "errors.amount", "Amount must be equal or greater than $ 1.000"),
+            arguments(simulationExceedAmount, "errors.amount", "Amount must be equal or less than than $ 40.000"),
+            arguments(simulationLessThanMinInstallments, "errors.installments", "Installments must be equal or greater than 2"),
+            arguments(simulationExceedInstallments, "errors.installments", "Installments must be equal or less than 48"),
+            arguments(simulationWithNotValidEmail, "errors.email", "must be a well-formed email address"),
+            arguments(simulationWithEmptyCPF, "errors.cpf", "CPF cannot be empty"),
+            arguments(simulationWithEmptyName, "errors.name", "Name cannot be empty")
+        );
     }
-
 }
