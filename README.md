@@ -11,6 +11,7 @@ Don't forget to give this project a ⭐
 * [About the Project Structure](#about-the-project-structure)
 * [Libraries](#libraries)
 * [Patterns applied](#patterns-applied)
+* [Pipeline](#pipeline)
 * [Do you want to help?](#do-you-want-to-help)
 
 This project was created to start the initial steps with test automation for a REST API using Rest-Assured.
@@ -165,5 +166,27 @@ It has a `schemas` folder with the JSON Schemas to enable Contract Testing using
 * Request and Response Specification
 * Base Test
 
+## Pipeline
+
+This project uses [GitHub Actions](https://github.com/features/actions) to run the all the tests in a pipeline.
+You can find it at https://github.com/eliasnogueira/restassured-complete-basic-example/blob/master/.github/workflows/test-execution.yml
+
+We have the following pipeline steps:
+```
+build -> health check -> contract -> e2d -> funcional 
+```
+
+Except the build, that is the traditional Maven build, the other stages has some parameters to determine the test type and the SUT (System Under Test).
+The parameters are:
+* `-Dgroups`: specify which test type will be executed
+* `-Dapi.base.uri`: specify a new base URI
+* `-Dapi.base.path`: specify a new base path
+* `-Dapi.port`: specify a new port
+* `-Dapi.health.context`: specify a new health context
+
+All the parameters, except the `-Dgroups` are pointing to Heroku because we can't run it locally.
+It's a great example about how can you set different attribute values to run your tests.
+
 ## Do you want to help?
+
 Please read the [Contribution guide](CONTRIBUTING.md)
