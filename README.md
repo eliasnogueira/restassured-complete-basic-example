@@ -1,5 +1,6 @@
 # Rest-Assured Complete Basic Example
 [![Actions Status](https://github.com/eliasnogueira/restassured-complete-basic-example/workflows/Build%20and%20Test/badge.svg)](https://github.com/eliasnogueira/restassured-complete-basic-example/actions)
+
 Don't forget to give this project a ⭐
 
 * [Required Software](#required-software)
