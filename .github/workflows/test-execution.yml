@@ -6,6 +6,12 @@ on:
   pull_request:
     branches:
       - master
+  workflow_dispatch:
+    inputs:
+      test-run:
+        description: 'Run Tests (y/n)?'
+        required: true
+        default: 'y'
 jobs:
   build:
     runs-on: ubuntu-latest
