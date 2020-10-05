@@ -23,9 +23,9 @@
  */
 package com.eliasnogueira.credit.specs;
 
+import com.eliasnogueira.credit.base.BaseAPI;
 import com.eliasnogueira.credit.config.Configuration;
 import com.eliasnogueira.credit.config.ConfigurationManager;
-import com.eliasnogueira.credit.test.BaseAPI;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 
