@@ -27,12 +27,13 @@ import com.github.javafaker.Faker;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-@Log4j2
 public class RestrictionDataFactory {
 
     private final Faker faker;
+    private static final Logger log = LogManager.getLogger(RestrictionDataFactory.class);
 
     public RestrictionDataFactory() {
         faker = new Faker();
@@ -58,7 +59,10 @@ public class RestrictionDataFactory {
                 "58063164083"
             );
 
-        return cpfWithRestriction.get(
+        String randomCpf = cpfWithRestriction.get(
             new Random().nextInt(cpfWithRestriction.size()));
+
+        log.debug(randomCpf);
+        return randomCpf;
     }
 }
