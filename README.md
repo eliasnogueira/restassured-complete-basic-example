@@ -1,34 +1,16 @@
 # Rest-Assured Complete Basic Example
-
+[![Actions Status](https://github.com/eliasnogueira/restassured-complete-basic-example/workflows/Build%20and%20Test/badge.svg)](https://github.com/eliasnogueira/restassured-complete-basic-example/actions)
 Don't forget to give this project a ⭐
 
-* [Required Software](##required-software)
+* [Required Software](#required-software)
 * [How to execute the tests](#how-to-execute-the-tests)
    * [Running the backend API](#running-the-backend-api)
    * [Running the test suites](#running-the-test-suites)
    * [Generating the test report](#generating-the-test-report)
 * [About the Project Structure](#about-the-project-structure)
-   * [src/main/java](#srcmainjava)
-      * [test](#test)
-      * [client](##client)
-      * [commons](#commons)
-      * [config](#config)
-      * [data](#data)
-         * [factory](factory)
-         * [provider](#provider)
-         * [suite](#suite)
-         * [support](#support)
-      * [model](#model)
-      * [specs](#specs)
-   * [src/test/java](#srctestjava)
-      * [e2e](#e2e)
-      * [general](#general) 
-      * [restrictions](#restrictions)
-      * [#simulations](##simulations)
-   * [src/test/resources](#srctestresources)
-* [Libraries](##libraries)
+* [Libraries](#libraries)
 * [Patterns applied](#patterns-applied)
-* [Do you want to help?](##do-you-want-to-help)
+* [Do you want to help?](#do-you-want-to-help)
 
 This project was created to start the initial steps with test automation for a REST API using Rest-Assured.
 It tests the API: [combined-credit-api](https://github.com/eliasnogueira/combined-credit-api)
