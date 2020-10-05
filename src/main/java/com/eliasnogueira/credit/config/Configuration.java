@@ -24,8 +24,13 @@
 package com.eliasnogueira.credit.config;
 
 import org.aeonbits.owner.Config;
+import org.aeonbits.owner.Config.LoadPolicy;
+import org.aeonbits.owner.Config.LoadType;
 
-@Config.Sources({"classpath:conf/${environment}.properties"})
+@LoadPolicy(LoadType.MERGE)
+@Config.Sources({
+    "system:properties",
+    "classpath:api.properties"})
 public interface Configuration extends Config {
 
     @Key("api.base.path")

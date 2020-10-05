@@ -25,8 +25,12 @@ package com.eliasnogueira.credit.commons;
 
 import com.eliasnogueira.credit.config.Configuration;
 import com.eliasnogueira.credit.config.ConfigurationManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class MessageFormat {
+
+    private static final Logger log = LogManager.getLogger(MessageFormat.class);
 
     private MessageFormat() {}
     /*
@@ -34,15 +38,12 @@ public class MessageFormat {
      * to make the requests, but should not be show in the URL
      */
     public static String locationURLByEnvironment() {
-        String locationURL;
         Configuration configuration = ConfigurationManager.getConfiguration();
-        String env = System.getProperty("environment");
 
-        locationURL = env != null && env.equals("test") ? java.text.MessageFormat
-            .format("{0}{1}/simulations/", configuration.baseURI(), configuration.basePath())
-            : java.text.MessageFormat.format("{0}:{1}{2}/simulations/", configuration.baseURI(),
-                String.valueOf(configuration.port()), configuration.basePath());
+        String locationURL = java.text.MessageFormat.format("{0}:{1}{2}/simulations/", configuration.baseURI(),
+            String.valueOf(configuration.port()), configuration.basePath());
 
+        log.debug(locationURL);
         return locationURL;
     }
 }
