@@ -6,19 +6,27 @@
 
     <groupId>com.eliasogueira.credit</groupId>
     <artifactId>test-combined-credit-api</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>2.0-SNAPSHOT</version>
 
     <properties>
-        <suite>all</suite>
+        <java-compiler.version>11</java-compiler.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+        <maven-failsafe-plugin.version>3.0.0-M5</maven-failsafe-plugin.version>
+
         <restassured.version>4.3.1</restassured.version>
-        <testng.version>7.1.0</testng.version>
-        <json.version>20200518</json.version>
-        <lombok.version>1.18.12</lombok.version>
+        <junit.jupiter.version>5.7.0</junit.jupiter.version>
         <javafaker.version>1.0.2</javafaker.version>
-        <owner.version>1.0.10</owner.version>
+        <owner.version>1.0.12</owner.version>
         <log4j.version>2.13.3</log4j.version>
-        <extentreports.version>5.0.0</extentreports.version>
-        <extendstestng.version>1.0.7</extendstestng.version>
+        <allure.version>2.13.6</allure.version>
+        <allure-maven.version>2.10.0</allure-maven.version>
+        <aspectj.version>1.9.5</aspectj.version>
+        <allure.cmd.download.url>
+            https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
+        </allure.cmd.download.url>
     </properties>
 
     <dependencies>
@@ -35,22 +43,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>${testng.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>${json.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.jupiter.version}</version>
         </dependency>
 
         <dependency>
@@ -78,16 +73,24 @@
         </dependency>
 
         <dependency>
-            <groupId>com.aventstack</groupId>
-            <artifactId>extentreports</artifactId>
-            <version>${extentreports.version}</version>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.aventstack</groupId>
-            <artifactId>extentreports-testng-adapter</artifactId>
-            <version>${extendstestng.version}</version>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-attachments</artifactId>
+            <version>${allure.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit5</artifactId>
+            <version>2.13.6</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -95,25 +98,43 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>${maven-surefire-plugin.version}</version>
                 <configuration>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/suites/${suite}.xml</suiteXmlFile>
-                    </suiteXmlFiles>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>${allure-maven.version}</version>
+                <configuration>
+                    <reportVersion>${allure.version}</reportVersion>
+                    <allureDownloadUrl>
+                        ${allure.cmd.download.url}/${allure.version}/allure-commandline-${allure.version}.zip
+                    </allureDownloadUrl>
                 </configuration>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <source>8</source>
-                    <target>8</target>
+                    <source>${java-compiler.version}</source>
+                    <target>${java-compiler.version}</target>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
 
 </project>
