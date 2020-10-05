@@ -23,26 +23,22 @@
  */
 package com.eliasnogueira.credit.restrictions;
 
+import static com.eliasnogueira.credit.data.suite.TestTags.CONTRACT;
 import static io.restassured.RestAssured.basePath;
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
-import com.eliasnogueira.credit.data.factory.RestrictionDataFactory;
-import com.eliasnogueira.credit.test.BaseAPI;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
-public class RestrictionsContractTest extends BaseAPI {
+class RestrictionsContractTest extends RestrictionsBase {
 
-    private RestrictionDataFactory restrictionDataFactory;
-
-    @BeforeClass(alwaysRun = true)
-    public void setup() {
-        restrictionDataFactory = new RestrictionDataFactory();
-    }
-
-    @Test(groups = "contract")
-    public void contractOnV1() {
+    @Test
+    @Tag(CONTRACT)
+    @DisplayName("Should validate the restrictions schema for GET method in v1")
+    void contractOnV1() {
         given().
             pathParam("cpf", restrictionDataFactory.cpfWithRestriction()).
         when().
@@ -57,8 +53,11 @@ public class RestrictionsContractTest extends BaseAPI {
      * You can enable the test (setting true) and see the errors because the response body is
      * different on v2
      */
-    @Test(groups = "contract", enabled = false)
-    public void contractOnV2() {
+    @Test
+    @Tag(CONTRACT)
+    @Disabled
+    @DisplayName("Should validate the restrictions schema for GET method in v2")
+    void contractOnV2() {
         basePath = "/api/v2";
 
         given().

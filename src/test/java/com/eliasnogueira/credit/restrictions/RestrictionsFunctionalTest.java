@@ -23,27 +23,22 @@
  */
 package com.eliasnogueira.credit.restrictions;
 
+import static com.eliasnogueira.credit.data.suite.TestTags.FUNCTIONAL;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
 
-import com.eliasnogueira.credit.data.factory.RestrictionDataFactory;
-import com.eliasnogueira.credit.test.BaseAPI;
 import java.text.MessageFormat;
 import org.apache.http.HttpStatus;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
-public class RestrictionsFunctionalTest extends BaseAPI {
+class RestrictionsFunctionalTest extends RestrictionsBase {
 
-    private RestrictionDataFactory restrictionDataFactory;
-
-    @BeforeClass(alwaysRun = true)
-    public void setup() {
-        restrictionDataFactory = new RestrictionDataFactory();
-    }
-
-    @Test(groups = "functional")
-    public void cpfWithNoRestriction() {
+    @Test
+    @Tag(FUNCTIONAL)
+    @DisplayName("Should query a CPF without restriction")
+    void cpfWithNoRestriction() {
         given().
             pathParam("cpf", restrictionDataFactory.cpfWithoutRestriction()).
         when().
@@ -52,8 +47,10 @@ public class RestrictionsFunctionalTest extends BaseAPI {
             .statusCode(HttpStatus.SC_NOT_FOUND);
     }
 
-    @Test(groups = "functional")
-    public void cpfWithRestriction() {
+    @Test
+    @Tag(FUNCTIONAL)
+    @DisplayName("Should query a CPF with restriction")
+    void cpfWithRestriction() {
         String cpfWithRestriction = restrictionDataFactory.cpfWithRestriction();
 
         given().

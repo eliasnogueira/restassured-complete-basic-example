@@ -23,32 +23,37 @@
  */
 package com.eliasnogueira.credit.general;
 
+import static com.eliasnogueira.credit.data.suite.TestTags.HEALTH;
 import static io.restassured.RestAssured.basePath;
 import static io.restassured.RestAssured.when;
 import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.CoreMatchers.is;
 
 import com.eliasnogueira.credit.config.ConfigurationManager;
-import com.eliasnogueira.credit.test.BaseAPI;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import com.eliasnogueira.credit.base.BaseAPI;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
-public class CreditHealthCheckTest extends BaseAPI {
+class CreditHealthCheckTest extends BaseAPI {
 
-    @BeforeMethod(alwaysRun = true)
+    @BeforeEach
     public void setup() {
         configuration = ConfigurationManager.getConfiguration();
         basePath = configuration.health();
     }
 
-    @AfterMethod
-    public void tearDown() {
+    @AfterEach
+    void tearDown() {
         basePath = configuration.basePath();
     }
 
-    @Test(groups = "health")
-    public void healthCheck() {
+    @Test
+    @Tag(HEALTH)
+    @DisplayName("Should be able to hit the health endpoint")
+    void healthCheck() {
         when().
             get("/health").
         then().

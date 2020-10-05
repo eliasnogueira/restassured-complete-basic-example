@@ -23,38 +23,38 @@
  */
 package com.eliasnogueira.credit.simulations;
 
+import static com.eliasnogueira.credit.data.suite.TestTags.FUNCTIONAL;
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import com.eliasnogueira.credit.commons.MessageFormat;
-import com.eliasnogueira.credit.data.factory.SimulationDataFactory;
-import com.eliasnogueira.credit.data.provider.SimulationDataProvider;
 import com.eliasnogueira.credit.model.Simulation;
-import com.eliasnogueira.credit.test.BaseAPI;
 import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.hamcrest.Matchers;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
-public class SimulationsFunctionalTest extends BaseAPI {
+class SimulationsFunctionalTest extends SimulationsBase {
 
-    private SimulationDataFactory simulationDataFactory;
-
-    @BeforeClass(alwaysRun = true)
-    public void setup() {
-        simulationDataFactory = new SimulationDataFactory();
-    }
+    private static final String FAILED_VALIDATION =
+        "com.eliasnogueira.credit.data.provider.SimulationDataProvider#failedValidations";
 
     /*
      * not that, in order to assert the amount without problem, we must enable a configuration
      * it's located at BaseAPI class
      */
-    @Test(groups = "functional")
-    public void getOneExistingSimulation() {
+    @Test
+    @Tag(FUNCTIONAL)
+    @DisplayName("Should validate one existing simulation")
+    void getOneExistingSimulation() {
         Simulation existingSimulation = simulationDataFactory.oneExistingSimulation();
 
         given().
@@ -73,8 +73,10 @@ public class SimulationsFunctionalTest extends BaseAPI {
             );
     }
 
-    @Test(groups = "functional")
-    public void getAllExistingSimulations() {
+    @Test
+    @Tag(FUNCTIONAL)
+    @DisplayName("Should validate all existing simulations")
+    void getAllExistingSimulations() {
         Simulation[] existingSimulations = simulationDataFactory.allExistingSimulations();
 
         Simulation[] simulationsRequested =
@@ -85,11 +87,13 @@ public class SimulationsFunctionalTest extends BaseAPI {
                 extract().
                    as(Simulation[].class);
 
-        assertThat(existingSimulations, equalTo(simulationsRequested));
+        assertThat(existingSimulations, Matchers.arrayContaining(simulationsRequested));
     }
 
-    @Test(groups = "functional")
-    public void simulationByNameNotFound() {
+    @Test
+    @Tag(FUNCTIONAL)
+    @DisplayName("Should filter by name a non-existing simulation")
+    void simulationByNameNotFound() {
         given().
             queryParam("name", simulationDataFactory.nonExistentName()).
         when().
@@ -98,8 +102,10 @@ public class SimulationsFunctionalTest extends BaseAPI {
             statusCode(HttpStatus.SC_NOT_FOUND);
     }
 
-    @Test(groups = "functional")
-    public void returnSimulationByName() {
+    @Test
+    @Tag(FUNCTIONAL)
+    @DisplayName("Should find a simulation filtered by name")
+    void returnSimulationByName() {
         Simulation existingSimulation = simulationDataFactory.oneExistingSimulation();
 
         given().
@@ -121,8 +127,10 @@ public class SimulationsFunctionalTest extends BaseAPI {
     /*
      * here there is an header validation
      */
-    @Test(groups = "functional")
-    public void createNewSimulationSuccessfully() {
+    @Test
+    @Tag(FUNCTIONAL)
+    @DisplayName("Should create a new simulation")
+    void createNewSimulationSuccessfully() {
         Simulation simulation = simulationDataFactory.validSimulation();
 
         given().
@@ -135,11 +143,11 @@ public class SimulationsFunctionalTest extends BaseAPI {
             header("Location", containsString(MessageFormat.locationURLByEnvironment()));
     }
 
-    @Test(groups = "functional", dataProvider = "failSimulationValidations",
-        dataProviderClass = SimulationDataProvider.class)
-    public void invalidSimulations(Simulation invalidSimulation, String path,
-        String validationMessage) {
-
+    @Tag(FUNCTIONAL)
+    @ParameterizedTest(name = "Scenario: {2}")
+    @MethodSource(value = FAILED_VALIDATION)
+    @DisplayName("Should validate all the invalid scenarios")
+    void invalidSimulations(Simulation invalidSimulation, String path, String validationMessage) {
         given().
             contentType(ContentType.JSON).
             body(invalidSimulation).
@@ -150,8 +158,10 @@ public class SimulationsFunctionalTest extends BaseAPI {
             body(path, is(validationMessage));
     }
 
-    @Test(groups = "functional")
-    public void simulationWithDuplicatedCpf() {
+    @Test
+    @Tag(FUNCTIONAL)
+    @DisplayName("Should validate an CFP duplication")
+    void simulationWithDuplicatedCpf() {
         Simulation existingSimulation = simulationDataFactory.oneExistingSimulation();
         given().
             contentType(ContentType.JSON).
@@ -163,8 +173,10 @@ public class SimulationsFunctionalTest extends BaseAPI {
             body("message", is("CPF already exists"));
     }
 
-    @Test(groups = "functional")
-    public void deleteSimulationSuccessfully() {
+    @Test
+    @Tag(FUNCTIONAL)
+    @DisplayName("Should delete an existing simulation")
+    void deleteSimulationSuccessfully() {
         Simulation existingSimulation = simulationDataFactory.oneExistingSimulation();
 
         given().
@@ -175,8 +187,10 @@ public class SimulationsFunctionalTest extends BaseAPI {
             statusCode(HttpStatus.SC_NO_CONTENT);
     }
 
-    @Test(groups = "functional")
-    public void notFoundWhenDeleteSimulation() {
+    @Test
+    @Tag(FUNCTIONAL)
+    @DisplayName("Should validate the return when a non-existent simulation is sent")
+    void notFoundWhenDeleteSimulation() {
         given().
             pathParam("cpf", simulationDataFactory.notExistentCpf()).
         when().
@@ -185,8 +199,10 @@ public class SimulationsFunctionalTest extends BaseAPI {
             statusCode(HttpStatus.SC_NOT_FOUND);
     }
 
-    @Test(groups = "functional")
-    public void changeSimulationSuccessfully() {
+    @Test
+    @Tag(FUNCTIONAL)
+    @DisplayName("Should update an existing simulation")
+    void changeSimulationSuccessfully() {
         Simulation existingSimulation = simulationDataFactory.oneExistingSimulation();
 
         Simulation simulation = simulationDataFactory.validSimulation();
@@ -206,11 +222,13 @@ public class SimulationsFunctionalTest extends BaseAPI {
                     as(Simulation.class);
 
         assertThat("Simulation are not the same",
-            simulationReturned, equalTo(simulation));
+            simulationReturned, is(simulation));
     }
 
-    @Test(groups = "functional")
-    public void changeSimulationCpfNotFound() {
+    @Test
+    @Tag(FUNCTIONAL)
+    @DisplayName("Should validate the return of an update for a non-existent CPF")
+    void changeSimulationCpfNotFound() {
         Simulation simulation = simulationDataFactory.validSimulation();
 
         given().

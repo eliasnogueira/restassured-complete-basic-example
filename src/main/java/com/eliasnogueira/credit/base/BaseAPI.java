@@ -21,30 +21,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.eliasnogueira.credit.test;
+package com.eliasnogueira.credit.base;
 
 import static io.restassured.RestAssured.basePath;
 import static io.restassured.RestAssured.baseURI;
+import static io.restassured.RestAssured.config;
 import static io.restassured.RestAssured.port;
 import static io.restassured.config.JsonConfig.jsonConfig;
 import static io.restassured.config.RestAssuredConfig.newConfig;
 
-import com.aventstack.extentreports.testng.listener.ExtentITestListenerClassAdapter;
 import com.eliasnogueira.credit.config.Configuration;
 import com.eliasnogueira.credit.config.ConfigurationManager;
 import io.restassured.RestAssured;
 import io.restassured.config.SSLConfig;
 import io.restassured.path.json.config.JsonPathConfig.NumberReturnType;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
+import org.junit.jupiter.api.BeforeAll;
 
-@Listeners({ExtentITestListenerClassAdapter.class})
 public abstract class BaseAPI {
 
-    protected Configuration configuration;
+    protected static Configuration configuration;
 
-    @BeforeClass(alwaysRun = true)
-    public void before() {
+    @BeforeAll
+    public static void beforeAllTests() {
         configuration = ConfigurationManager.getConfiguration();
 
         baseURI = configuration.baseURI();
@@ -52,7 +50,7 @@ public abstract class BaseAPI {
         port = configuration.port();
 
         // solve the problem with big decimal assertions
-        RestAssured.config = newConfig().
+        config = newConfig().
             jsonConfig(jsonConfig().numberReturnType(NumberReturnType.BIG_DECIMAL)).
             sslConfig(new SSLConfig().allowAllHostnames());
 

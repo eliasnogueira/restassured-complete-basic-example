@@ -27,22 +27,26 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 import com.eliasnogueira.credit.data.factory.SimulationDataFactory;
-import com.eliasnogueira.credit.test.BaseAPI;
+import com.eliasnogueira.credit.base.BaseAPI;
 import io.restassured.http.ContentType;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
-public class SimulationsContractTest extends BaseAPI {
+class SimulationsContractTest extends BaseAPI {
 
-    private SimulationDataFactory simulationDataFactory;
+    private static SimulationDataFactory simulationDataFactory;
 
-    @BeforeClass(alwaysRun = true)
-    public void setup() {
+    @BeforeAll
+    static void setup() {
         simulationDataFactory = new SimulationDataFactory();
     }
 
-    @Test(groups = "contract")
-    public void getOneSimulation() {
+    @Test
+    @Tag("contract")
+    @DisplayName("Should validate the simulation schema for GET method")
+    void getOneSimulation() {
         String existentCpf = simulationDataFactory.oneExistingSimulation().getCpf();
         given().
             pathParam("cpf", existentCpf).
@@ -52,8 +56,10 @@ public class SimulationsContractTest extends BaseAPI {
             body(matchesJsonSchemaInClasspath("schemas/simulations_v1_schema.json"));
     }
 
-    @Test(groups = "contract")
-    public void simulationNotFound() {
+    @Test
+    @Tag("contract")
+    @DisplayName("Should validate the simulation schema for non-existing simulation")
+    void simulationNotFound() {
         given().
             pathParam("cpf", simulationDataFactory.notExistentCpf()).
         when().
@@ -62,8 +68,10 @@ public class SimulationsContractTest extends BaseAPI {
             body(matchesJsonSchemaInClasspath("schemas/simulations_not_existent_v1_schema.json"));
     }
 
-    @Test(groups = "contract")
-    public void simulationWithMissingInformation() {
+    @Test
+    @Tag("contract")
+    @DisplayName("Should validate the simulation schema for missing information")
+    void simulationWithMissingInformation() {
         given().
             contentType(ContentType.JSON).
             body(simulationDataFactory.missingAllInformation()).
