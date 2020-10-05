@@ -1,9 +1,0 @@
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="All tests suite" verbose="2">
-
-    <test name="All tests">
-        <packages>
-            <package name="com.eliasnogueira.credit.*" />
-        </packages>
-    </test>
-</suite>
