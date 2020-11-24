@@ -55,7 +55,7 @@ class RestrictionsContractTest extends RestrictionsBase {
      */
     @Test
     @Tag(CONTRACT)
-    @Disabled
+    @Disabled("disabled to execute the v1")
     @DisplayName("Should validate the restrictions schema for GET method in v2")
     void contractOnV2() {
         basePath = "/api/v2";
