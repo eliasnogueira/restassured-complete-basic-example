@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.eliasogueira.credit</groupId>
@@ -23,7 +23,7 @@
         <owner.version>1.0.12</owner.version>
         <log4j.version>2.14.0</log4j.version>
         <slf4j.version>2.0.0-alpha1</slf4j.version>
-        <allure.version>2.13.6</allure.version>
+        <allure.version>2.13.7</allure.version>
         <allure-maven.version>2.10.0</allure-maven.version>
         <aspectj.version>1.9.6</aspectj.version>
         <allure.cmd.download.url>
