@@ -30,7 +30,7 @@ import static org.apache.http.HttpStatus.SC_OK;
 import static org.hamcrest.CoreMatchers.is;
 
 import com.eliasnogueira.credit.config.ConfigurationManager;
-import com.eliasnogueira.credit.base.BaseAPI;
+import com.eliasnogueira.credit.BaseAPI;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

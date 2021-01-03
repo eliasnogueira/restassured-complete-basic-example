@@ -27,7 +27,7 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 import com.eliasnogueira.credit.data.factory.SimulationDataFactory;
-import com.eliasnogueira.credit.base.BaseAPI;
+import com.eliasnogueira.credit.BaseAPI;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;

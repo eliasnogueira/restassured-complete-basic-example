@@ -26,6 +26,8 @@ package com.eliasnogueira.credit.simulations;
 import static com.eliasnogueira.credit.data.suite.TestTags.FUNCTIONAL;
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.when;
+import static org.apache.http.HttpStatus.*;
+import static org.assertj.core.api.Assertions.*;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -35,6 +37,7 @@ import com.eliasnogueira.credit.commons.MessageFormat;
 import com.eliasnogueira.credit.model.Simulation;
 import io.restassured.http.ContentType;
 import org.apache.http.HttpStatus;
+import org.assertj.core.api.Assertions;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -62,7 +65,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
         when().
             get("/simulations/{cpf}").
         then().
-            statusCode(HttpStatus.SC_OK).
+            statusCode(SC_OK).
             body(
                 "name", equalTo(existingSimulation.getName()),
                 "cpf", equalTo(existingSimulation.getCpf()),
@@ -83,11 +86,11 @@ class SimulationsFunctionalTest extends SimulationsBase {
             when().
                 get("simulations/").
             then().
-                statusCode(HttpStatus.SC_OK).
+                statusCode(SC_OK).
                 extract().
                    as(Simulation[].class);
 
-        assertThat(existingSimulations, Matchers.arrayContaining(simulationsRequested));
+        Assertions.assertThat(existingSimulations).contains(simulationsRequested);
     }
 
     @Test
@@ -99,7 +102,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
         when().
             get("/simulations").
         then().
-            statusCode(HttpStatus.SC_NOT_FOUND);
+            statusCode(SC_NOT_FOUND);
     }
 
     @Test
@@ -113,7 +116,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
         when().
             get("/simulations").
         then().
-            statusCode(HttpStatus.SC_OK).
+            statusCode(SC_OK).
             body(
                 "[0].name", equalTo(existingSimulation.getName()),
                 "[0].cpf", equalTo(existingSimulation.getCpf()),
@@ -139,7 +142,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
         when().
             post("/simulations").
         then().
-            statusCode(HttpStatus.SC_CREATED).
+            statusCode(SC_CREATED).
             header("Location", containsString(MessageFormat.locationURLByEnvironment()));
     }
 
@@ -154,7 +157,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
         when().
             post("/simulations").
         then().
-            statusCode(HttpStatus.SC_UNPROCESSABLE_ENTITY).
+            statusCode(SC_UNPROCESSABLE_ENTITY).
             body(path, is(validationMessage));
     }
 
@@ -169,7 +172,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
         when().
             post("/simulations/").
         then().
-            statusCode(HttpStatus.SC_CONFLICT).
+            statusCode(SC_CONFLICT).
             body("message", is("CPF already exists"));
     }
 
@@ -184,7 +187,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
         when().
             delete("/simulations/{cpf}").
         then().
-            statusCode(HttpStatus.SC_NO_CONTENT);
+            statusCode(SC_NO_CONTENT);
     }
 
     @Test
@@ -196,7 +199,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
         when().
             delete("/simulations/{cpf}").
         then().
-            statusCode(HttpStatus.SC_NOT_FOUND);
+            statusCode(SC_NOT_FOUND);
     }
 
     @Test
@@ -217,7 +220,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
             when().
                 put("/simulations/{cpf}").
             then().
-                statusCode(HttpStatus.SC_OK).
+                statusCode(SC_OK).
                 extract().
                     as(Simulation.class);
 
@@ -238,6 +241,6 @@ class SimulationsFunctionalTest extends SimulationsBase {
         when().
             put("/simulations/{cpf}").
         then().
-            statusCode(HttpStatus.SC_NOT_FOUND);
+            statusCode(SC_NOT_FOUND);
     }
 }

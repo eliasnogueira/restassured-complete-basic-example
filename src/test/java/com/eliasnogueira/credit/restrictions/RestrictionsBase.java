@@ -23,7 +23,7 @@
  */
 package com.eliasnogueira.credit.restrictions;
 
-import com.eliasnogueira.credit.base.BaseAPI;
+import com.eliasnogueira.credit.BaseAPI;
 import com.eliasnogueira.credit.data.factory.RestrictionDataFactory;
 import org.junit.jupiter.api.BeforeAll;
 

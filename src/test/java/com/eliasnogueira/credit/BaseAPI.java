@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.eliasnogueira.credit.base;
+package com.eliasnogueira.credit;
 
 import static io.restassured.RestAssured.basePath;
 import static io.restassured.RestAssured.baseURI;
@@ -35,7 +35,13 @@ import com.eliasnogueira.credit.config.ConfigurationManager;
 import io.restassured.RestAssured;
 import io.restassured.config.SSLConfig;
 import io.restassured.path.json.config.JsonPathConfig.NumberReturnType;
+import org.codehaus.groovy.runtime.WritableFile;
 import org.junit.jupiter.api.BeforeAll;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.PrintStream;
 
 public abstract class BaseAPI {
 
