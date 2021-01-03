@@ -33,8 +33,7 @@ import java.util.stream.IntStream;
 public class CpfGenerator {
 
     public String generate() {
-        Random r = new Random();
-        String sbCpfNumber = IntStream.range(0, 9).mapToObj(i -> String.valueOf(r.nextInt(9)))
+        String sbCpfNumber = IntStream.range(0, 9).mapToObj(i -> String.valueOf(new Random().nextInt(9)))
             .collect(Collectors.joining());
 
         return generateDigits(sbCpfNumber);
@@ -46,7 +45,7 @@ public class CpfGenerator {
         int multiple = digitsBase.length() + 1;
 
         for (char digit : digitsBase.toCharArray()) {
-            long partial = Integer.parseInt(String.valueOf(digit)) * (multiple--);
+            long partial = (multiple--) * (long) Integer.parseInt(String.valueOf(digit));
             total += partial;
         }
 

@@ -59,8 +59,7 @@ public class RestrictionDataFactory {
                 "58063164083"
             );
 
-        String randomCpf = cpfWithRestriction.get(
-            new Random().nextInt(cpfWithRestriction.size()));
+        String randomCpf = cpfWithRestriction.get(new Random().nextInt(cpfWithRestriction.size()));
 
         log.debug(randomCpf);
         return randomCpf;
