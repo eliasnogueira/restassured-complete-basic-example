@@ -23,13 +23,15 @@
  */
 package com.eliasnogueira.credit.specs;
 
-import com.eliasnogueira.credit.base.BaseAPI;
 import com.eliasnogueira.credit.config.Configuration;
 import com.eliasnogueira.credit.config.ConfigurationManager;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 
-public class InitialStateSpecs extends BaseAPI {
+public class InitialStateSpecs {
+
+    private InitialStateSpecs() {
+    }
 
     public static RequestSpecification set() {
         Configuration configuration = ConfigurationManager.getConfiguration();

@@ -23,7 +23,7 @@
  */
 package com.eliasnogueira.credit.simulations;
 
-import com.eliasnogueira.credit.base.BaseAPI;
+import com.eliasnogueira.credit.BaseAPI;
 import com.eliasnogueira.credit.data.factory.SimulationDataFactory;
 import org.junit.jupiter.api.BeforeAll;
 
