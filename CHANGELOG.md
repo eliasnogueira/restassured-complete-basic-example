@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 18-10-2021
+
+### Changed
+- Updated the following libraries
+   - `allure-2.15.0` 
+   - `assertj-3.21.0`
+   - `junit-5.8.1`
+   - `log4j-2.14.1`
+   - `restassured-4.4.0`
+
 ## [2.1.0] - 03-01-2021
 
 ### Changed
