@@ -44,4 +44,7 @@ public interface Configuration extends Config {
 
     @Key("api.health.context")
     String health();
+
+    @Key("log.all")
+    boolean logAll();
 }
