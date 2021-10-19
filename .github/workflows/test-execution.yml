@@ -30,10 +30,10 @@ jobs:
       - name: Build with Maven
         run: mvn -DskipTests -B package --file pom.xml
       - name: Run Health Check Tests
-        run: mvn test -Dgroups="health" -Dapi.base.uri=https://combined-credit-api.herokuapp.com -Dapi.base.path=/api/v1 -Dapi.port=443 -Dapi.health.context=/actuator
+        run: mvn test -Dgroups="health" -Dapi.base.uri=https://eliasnogueira-credit-api.herokuapp.com -Dapi.base.path=/api/v1 -Dapi.port=443 -Dapi.health.context=/actuator
       - name: Run Contract Tests
-        run: mvn test -Dgroups="contract" -Dapi.base.uri=https://combined-credit-api.herokuapp.com -Dapi.base.path=/api/v1 -Dapi.port=443 -Dapi.health.context=/actuator
+        run: mvn test -Dgroups="contract" -Dapi.base.uri=https://eliasnogueira-credit-api.herokuapp.com -Dapi.base.path=/api/v1 -Dapi.port=443 -Dapi.health.context=/actuator
       - name: Run E2E Tests
-        run: mvn test -Dgroups="e2e" -Dapi.base.uri=https://combined-credit-api.herokuapp.com -Dapi.base.path=/api/v1 -Dapi.port=443 -Dapi.health.context=/actuator
+        run: mvn test -Dgroups="e2e" -Dapi.base.uri=https://eliasnogueira-credit-api.herokuapp.com -Dapi.base.path=/api/v1 -Dapi.port=443 -Dapi.health.context=/actuator
       - name: Run Functional Tests
-        run: mvn test -Dgroups="functional" -Dapi.base.uri=https://combined-credit-api.herokuapp.com -Dapi.base.path=/api/v1 -Dapi.port=443 -Dapi.health.context=/actuator
+        run: mvn test -Dgroups="functional" -Dapi.base.uri=https://eliasnogueira-credit-api.herokuapp.com -Dapi.base.path=/api/v1 -Dapi.port=443 -Dapi.health.context=/actuator
