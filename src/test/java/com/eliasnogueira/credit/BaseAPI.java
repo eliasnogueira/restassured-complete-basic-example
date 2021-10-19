@@ -34,6 +34,8 @@ import com.eliasnogueira.credit.config.Configuration;
 import com.eliasnogueira.credit.config.ConfigurationManager;
 import io.restassured.RestAssured;
 import io.restassured.config.SSLConfig;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.path.json.config.JsonPathConfig.NumberReturnType;
 import org.codehaus.groovy.runtime.WritableFile;
 import org.junit.jupiter.api.BeforeAll;
@@ -61,6 +63,19 @@ public abstract class BaseAPI {
             sslConfig(new SSLConfig().allowAllHostnames());
 
         RestAssured.useRelaxedHTTPSValidation();
-        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+
+        determineLog();
+    }
+
+    /*
+     * if log.all is true in the api.properties file all the request and response information will be logged
+     * otherwise it will log only when the test fails
+     */
+    private static void determineLog() {
+        if (configuration.logAll()) {
+            RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
+        } else {
+            RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
+        }
     }
 }
