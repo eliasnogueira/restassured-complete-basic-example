@@ -32,6 +32,19 @@ import java.util.stream.IntStream;
  */
 public class CpfGenerator {
 
+    public String generateWitFormatting(){
+        String cpfNumber = generate();
+        return new StringBuilder()
+                .append(cpfNumber.substring(0, 3))
+                .append(".")
+                .append(cpfNumber.substring(3, 6))
+                .append(".")
+                .append(cpfNumber.substring(6, 9))
+                .append("-")
+                .append(cpfNumber.substring(9, 11))
+                .toString();
+    }
+
     public String generate() {
         String sbCpfNumber = IntStream.range(0, 9).mapToObj(i -> String.valueOf(new Random().nextInt(9)))
             .collect(Collectors.joining());
