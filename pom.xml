@@ -16,14 +16,14 @@
         <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
         <maven-failsafe-plugin.version>3.0.0-M5</maven-failsafe-plugin.version>
 
-        <restassured.version>4.4.0</restassured.version>
-        <junit.jupiter.version>5.8.1</junit.jupiter.version>
-        <assertj.version>3.21.0</assertj.version>
+        <restassured.version>5.0.1</restassured.version>
+        <junit.jupiter.version>5.8.2</junit.jupiter.version>
+        <assertj.version>3.22.0</assertj.version>
         <javafaker.version>1.0.2</javafaker.version>
         <owner.version>1.0.12</owner.version>
-        <log4j.version>2.14.1</log4j.version>
-        <slf4j.version>2.0.0-alpha1</slf4j.version>
-        <allure.version>2.15.0</allure.version>
+        <log4j.version>2.17.2</log4j.version>
+        <slf4j.version>2.0.0-alpha7</slf4j.version>
+        <allure.version>2.17.3</allure.version>
         <allure-maven.version>2.10.0</allure-maven.version>
         <aspectj.version>1.9.6</aspectj.version>
         <allure.cmd.download.url>
