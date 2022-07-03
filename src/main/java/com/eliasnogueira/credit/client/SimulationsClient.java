@@ -23,10 +23,11 @@
  */
 package com.eliasnogueira.credit.client;
 
-import static io.restassured.RestAssured.given;
-
+import com.eliasnogueira.credit.data.changeless.SimulationData;
 import com.eliasnogueira.credit.specs.SimulationsSpecs;
 import io.restassured.response.Response;
+
+import static io.restassured.RestAssured.given;
 
 public class SimulationsClient {
 
@@ -35,7 +36,7 @@ public class SimulationsClient {
             given().
                 spec(SimulationsSpecs.postValidSimulation()).
             when().
-                post("/simulations").
+                post(SimulationData.SERVICE).
             then().
                 spec(SimulationsSpecs.createdSimulation()).
                 extract().

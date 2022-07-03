@@ -23,10 +23,11 @@
  */
 package com.eliasnogueira.credit.client;
 
-import static io.restassured.RestAssured.given;
-
+import com.eliasnogueira.credit.data.changeless.RestrictionsData;
 import com.eliasnogueira.credit.specs.RestrictionsSpecs;
 import io.restassured.response.Response;
+
+import static io.restassured.RestAssured.given;
 
 public class RestrictionsClient {
 
@@ -35,7 +36,7 @@ public class RestrictionsClient {
             given().
                 spec(RestrictionsSpecs.cpfWithoutRestrictionRequestSpec()).
             when().
-                get("/restrictions/{cpf}").
+                get(RestrictionsData.GET_RESTRICTIONS).
             then().
                 spec(RestrictionsSpecs.notFoundResponse()).
                 extract().

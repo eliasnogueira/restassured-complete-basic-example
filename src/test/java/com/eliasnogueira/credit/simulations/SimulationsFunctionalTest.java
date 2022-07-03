@@ -23,27 +23,29 @@
  */
 package com.eliasnogueira.credit.simulations;
 
-import static com.eliasnogueira.credit.data.suite.TestTags.FUNCTIONAL;
-import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.when;
-import static org.apache.http.HttpStatus.*;
-import static org.assertj.core.api.Assertions.*;
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-
 import com.eliasnogueira.credit.commons.MessageFormat;
 import com.eliasnogueira.credit.model.Simulation;
 import io.restassured.http.ContentType;
-import org.apache.http.HttpStatus;
 import org.assertj.core.api.Assertions;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+
+import static com.eliasnogueira.credit.data.changeless.TestSuiteTags.FUNCTIONAL;
+import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.when;
+import static org.apache.http.HttpStatus.SC_CONFLICT;
+import static org.apache.http.HttpStatus.SC_CREATED;
+import static org.apache.http.HttpStatus.SC_NOT_FOUND;
+import static org.apache.http.HttpStatus.SC_NO_CONTENT;
+import static org.apache.http.HttpStatus.SC_OK;
+import static org.apache.http.HttpStatus.SC_UNPROCESSABLE_ENTITY;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 class SimulationsFunctionalTest extends SimulationsBase {
 
@@ -58,7 +60,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
     @Tag(FUNCTIONAL)
     @DisplayName("Should validate one existing simulation")
     void getOneExistingSimulation() {
-        Simulation existingSimulation = simulationDataFactory.oneExistingSimulation();
+        var existingSimulation = simulationDataFactory.oneExistingSimulation();
 
         given().
             pathParam("cpf", existingSimulation.getCpf()).
@@ -109,7 +111,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
     @Tag(FUNCTIONAL)
     @DisplayName("Should find a simulation filtered by name")
     void returnSimulationByName() {
-        Simulation existingSimulation = simulationDataFactory.oneExistingSimulation();
+        var existingSimulation = simulationDataFactory.oneExistingSimulation();
 
         given().
             queryParam("name", existingSimulation.getName()).
@@ -128,13 +130,13 @@ class SimulationsFunctionalTest extends SimulationsBase {
     }
 
     /*
-     * here there is an header validation
+     * here there is a header validation
      */
     @Test
     @Tag(FUNCTIONAL)
     @DisplayName("Should create a new simulation")
     void createNewSimulationSuccessfully() {
-        Simulation simulation = simulationDataFactory.validSimulation();
+        var simulation = simulationDataFactory.validSimulation();
 
         given().
             contentType(ContentType.JSON).
@@ -165,7 +167,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
     @Tag(FUNCTIONAL)
     @DisplayName("Should validate an CFP duplication")
     void simulationWithDuplicatedCpf() {
-        Simulation existingSimulation = simulationDataFactory.oneExistingSimulation();
+        var existingSimulation = simulationDataFactory.oneExistingSimulation();
         given().
             contentType(ContentType.JSON).
             body(existingSimulation).
@@ -180,7 +182,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
     @Tag(FUNCTIONAL)
     @DisplayName("Should delete an existing simulation")
     void deleteSimulationSuccessfully() {
-        Simulation existingSimulation = simulationDataFactory.oneExistingSimulation();
+        var existingSimulation = simulationDataFactory.oneExistingSimulation();
 
         given().
             pathParam("cpf", existingSimulation.getCpf()).
@@ -206,13 +208,13 @@ class SimulationsFunctionalTest extends SimulationsBase {
     @Tag(FUNCTIONAL)
     @DisplayName("Should update an existing simulation")
     void changeSimulationSuccessfully() {
-        Simulation existingSimulation = simulationDataFactory.oneExistingSimulation();
+        var existingSimulation = simulationDataFactory.oneExistingSimulation();
 
-        Simulation simulation = simulationDataFactory.validSimulation();
+        var simulation = simulationDataFactory.validSimulation();
         simulation.setCpf(existingSimulation.getCpf());
         simulation.setInsurance(existingSimulation.getInsurance());
 
-        Simulation simulationReturned =
+        var simulationReturned =
             given().
                 contentType(ContentType.JSON).
                 pathParam("cpf", existingSimulation.getCpf()).
@@ -232,7 +234,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
     @Tag(FUNCTIONAL)
     @DisplayName("Should validate the return of an update for a non-existent CPF")
     void changeSimulationCpfNotFound() {
-        Simulation simulation = simulationDataFactory.validSimulation();
+        var simulation = simulationDataFactory.validSimulation();
 
         given().
             contentType(ContentType.JSON).

@@ -23,35 +23,42 @@
  */
 package com.eliasnogueira.credit.data.factory;
 
-import static io.restassured.RestAssured.when;
-
 import com.eliasnogueira.credit.data.support.CpfGenerator;
 import com.eliasnogueira.credit.model.Simulation;
 import com.eliasnogueira.credit.model.SimulationBuilder;
 import com.github.javafaker.Faker;
-import java.math.BigDecimal;
-import java.util.Random;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.math.BigDecimal;
+import java.security.SecureRandom;
+
+import static io.restassured.RestAssured.when;
 
 public class SimulationDataFactory {
+
+    private static final Logger log = LogManager.getLogger(SimulationDataFactory.class);
 
     private static final int MIN_AMOUNT = 1000;
     private static final int MAX_AMOUNT = 40000;
     private static final int MIN_INSTALLMENTS = 2;
     private static final int MAX_INSTALLMENTS = 48;
-    private final Faker faker;
-
-    public SimulationDataFactory() {
-        faker = new Faker();
-    }
+    private final Faker faker = new Faker();
 
     public String nonExistentName() {
-        return faker.name().firstName();
+        String nonExistentName = faker.name().firstName();
+
+        log.info("Non existent name in use: {}", nonExistentName);
+        return nonExistentName;
     }
 
     public String notExistentCpf() {
-        return new CpfGenerator().generate();
+        String nonExistentCpf = new CpfGenerator().generate();
+
+        log.info("Not existent CPF in use: {}", nonExistentCpf);
+        return nonExistentCpf;
     }
 
     public Simulation validSimulation() {
@@ -60,7 +67,10 @@ public class SimulationDataFactory {
 
     public Simulation oneExistingSimulation() {
         Simulation[] simulations = allSimulationsFromApi();
-        return simulations[new Random().nextInt(simulations.length)];
+        Simulation oneExistingSimulation = simulations[new SecureRandom().nextInt(simulations.length)];
+
+        log.info(oneExistingSimulation);
+        return oneExistingSimulation;
     }
 
     public Simulation[] allExistingSimulations() {
@@ -68,82 +78,100 @@ public class SimulationDataFactory {
     }
 
     public Simulation simulationLessThanMinAmount() {
-        Simulation simulation = validSimulation();
-        simulation.setAmount(new BigDecimal(faker.number().numberBetween(1, MIN_AMOUNT - 1)));
+        var simulationLessThanMinAmount = validSimulation();
+        simulationLessThanMinAmount.setAmount(new BigDecimal(faker.number().numberBetween(1, MIN_AMOUNT - 1)));
 
-        return simulation;
+        log.info(simulationLessThanMinAmount);
+        return simulationLessThanMinAmount;
     }
 
     public Simulation simulationExceedAmount() {
-        Simulation simulation = validSimulation();
-        simulation.setAmount(new BigDecimal(faker.number().numberBetween(MAX_AMOUNT + 1, 99999)));
+        var simulationExceedAmount = validSimulation();
+        simulationExceedAmount.setAmount(new BigDecimal(faker.number().numberBetween(MAX_AMOUNT + 1, 99999)));
 
-        return simulation;
+        log.info(simulationExceedAmount);
+        return simulationExceedAmount;
     }
 
     public Simulation simulationLessThanMinInstallments() {
-        Simulation simulation = validSimulation();
-        simulation.setInstallments(MIN_INSTALLMENTS - 1);
+        var simulationLessThanMinInstallments = validSimulation();
+        simulationLessThanMinInstallments.setInstallments(MIN_INSTALLMENTS - 1);
 
-        return simulation;
+        log.info(simulationLessThanMinInstallments);
+        return simulationLessThanMinInstallments;
     }
 
     public Simulation simulationExceedInstallments() {
-        Simulation simulation = validSimulation();
-        simulation.setInstallments(faker.number().numberBetween(MAX_INSTALLMENTS + 1, 999));
+        var simulationExceedInstallments = validSimulation();
+        simulationExceedInstallments.setInstallments(faker.number().numberBetween(MAX_INSTALLMENTS + 1, 999));
 
-        return simulation;
+        log.info(simulationExceedInstallments);
+        return simulationExceedInstallments;
     }
 
     public Simulation simulationWithNotValidEmail() {
-        Simulation simulation = validSimulation();
-        simulation.setEmail(faker.name().username());
+        var simulationWithNotValidEmail = validSimulation();
+        simulationWithNotValidEmail.setEmail(faker.name().username());
 
-        return simulation;
+        log.info(simulationWithNotValidEmail);
+        return simulationWithNotValidEmail;
     }
 
     public Simulation simulationWithEmptyCPF() {
-        Simulation simulation = validSimulation();
-        simulation.setCpf(StringUtils.EMPTY);
+        var simulationWithEmptyCPF = validSimulation();
+        simulationWithEmptyCPF.setCpf(StringUtils.EMPTY);
 
-        return simulation;
+        log.info(simulationWithEmptyCPF);
+        return simulationWithEmptyCPF;
     }
 
     public Simulation simulationWithEmptyName() {
-        Simulation simulation = validSimulation();
-        simulation.setName(StringUtils.EMPTY);
+        var simulationWithEmptyName = validSimulation();
+        simulationWithEmptyName.setName(StringUtils.EMPTY);
 
-        return simulation;
+        log.info(simulationWithEmptyName);
+        return simulationWithEmptyName;
     }
 
     public Simulation missingAllInformation() {
-        return new SimulationBuilder().
-            cpf(StringUtils.EMPTY).
-            name(StringUtils.EMPTY).
-            email(faker.name().username()).
-            amount(new BigDecimal(faker.number().numberBetween(1, MIN_AMOUNT - 1))).
-            installments(MIN_INSTALLMENTS - 1).
-            insurance(faker.bool().bool()).
-            build();
+        var simulationWithMissingInfo =
+                new SimulationBuilder().
+                        cpf(StringUtils.EMPTY).
+                        name(StringUtils.EMPTY).
+                        email(faker.name().username()).
+                        amount(new BigDecimal(faker.number().numberBetween(1, MIN_AMOUNT - 1))).
+                        installments(MIN_INSTALLMENTS - 1).
+                        insurance(faker.bool().bool()).
+                        build();
+
+        log.info(simulationWithMissingInfo);
+        return simulationWithMissingInfo;
     }
 
     private Simulation[] allSimulationsFromApi() {
-        return
-            when().
-                get("/simulations/").
-            then().
-                statusCode(HttpStatus.SC_OK).
-                extract().
-                    as(Simulation[].class);
+        Simulation[] simulations =
+                when().
+                        get("/simulations/").
+                        then().
+                        statusCode(HttpStatus.SC_OK).
+                        extract().
+                        as(Simulation[].class);
+
+        log.info(simulations);
+        return simulations;
     }
 
     private Simulation newSimulation() {
-        return new SimulationBuilder().
-            name(faker.name().nameWithMiddle()).
-            cpf(new CpfGenerator().generate()).
-            email(faker.internet().emailAddress()).
-            amount(new BigDecimal(faker.number().numberBetween(MIN_AMOUNT, MAX_AMOUNT))).
-            installments(faker.number().numberBetween(MIN_INSTALLMENTS, MAX_INSTALLMENTS)).
-            insurance(faker.bool().bool()).build();
+        var newSimulation =
+                new SimulationBuilder().
+                        name(faker.name().nameWithMiddle()).
+                        cpf(new CpfGenerator().generate()).
+                        email(faker.internet().emailAddress()).
+                        amount(new BigDecimal(faker.number().numberBetween(MIN_AMOUNT, MAX_AMOUNT))).
+                        installments(faker.number().numberBetween(MIN_INSTALLMENTS, MAX_INSTALLMENTS)).
+                        insurance(faker.bool().bool()).build();
+
+        log.info(newSimulation);
+        return newSimulation;
     }
 }
