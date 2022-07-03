@@ -25,14 +25,8 @@ package com.eliasnogueira.credit.simulations;
 
 import com.eliasnogueira.credit.BaseAPI;
 import com.eliasnogueira.credit.data.factory.SimulationDataFactory;
-import org.junit.jupiter.api.BeforeAll;
 
 public abstract class SimulationsBase extends BaseAPI {
 
-    protected static SimulationDataFactory simulationDataFactory;
-
-    @BeforeAll
-    static void setup() {
-        simulationDataFactory = new SimulationDataFactory();
-    }
+    protected final SimulationDataFactory simulationDataFactory = new SimulationDataFactory();;
 }

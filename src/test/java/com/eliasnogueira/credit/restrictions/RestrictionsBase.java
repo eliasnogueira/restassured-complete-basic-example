@@ -25,14 +25,8 @@ package com.eliasnogueira.credit.restrictions;
 
 import com.eliasnogueira.credit.BaseAPI;
 import com.eliasnogueira.credit.data.factory.RestrictionDataFactory;
-import org.junit.jupiter.api.BeforeAll;
 
 public abstract class RestrictionsBase extends BaseAPI {
 
-    protected static RestrictionDataFactory restrictionDataFactory;
-
-    @BeforeAll
-    static void setup() {
-        restrictionDataFactory = new RestrictionDataFactory();
-    }
+    protected final RestrictionDataFactory restrictionDataFactory = new RestrictionDataFactory();
 }
