@@ -23,15 +23,17 @@
  */
 package com.eliasnogueira.credit.restrictions;
 
-import static com.eliasnogueira.credit.data.suite.TestTags.FUNCTIONAL;
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.*;
-
-import java.text.MessageFormat;
+import com.eliasnogueira.credit.data.changeless.RestrictionsData;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+
+import java.text.MessageFormat;
+
+import static com.eliasnogueira.credit.data.changeless.TestSuiteTags.FUNCTIONAL;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.is;
 
 class RestrictionsFunctionalTest extends RestrictionsBase {
 
@@ -40,9 +42,9 @@ class RestrictionsFunctionalTest extends RestrictionsBase {
     @DisplayName("Should query a CPF without restriction")
     void cpfWithNoRestriction() {
         given().
-            pathParam("cpf", restrictionDataFactory.cpfWithoutRestriction()).
+            pathParam(RestrictionsData.CPF, restrictionDataFactory.cpfWithoutRestriction()).
         when().
-            get("/restrictions/{cpf}").
+            get(RestrictionsData.GET_RESTRICTIONS).
         then()
             .statusCode(HttpStatus.SC_NOT_FOUND);
     }
@@ -54,12 +56,11 @@ class RestrictionsFunctionalTest extends RestrictionsBase {
         String cpfWithRestriction = restrictionDataFactory.cpfWithRestriction();
 
         given().
-            pathParam("cpf", cpfWithRestriction).
+            pathParam(RestrictionsData.CPF, cpfWithRestriction).
         when().
-            get("/restrictions/{cpf}").
+            get(RestrictionsData.GET_RESTRICTIONS).
         then()
             .statusCode(HttpStatus.SC_OK).
-            body("message",
-                is(MessageFormat.format("CPF {0} has a restriction", cpfWithRestriction)));
+            body("message", is(MessageFormat.format("CPF {0} has a restriction", cpfWithRestriction)));
     }
 }
