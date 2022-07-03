@@ -23,12 +23,19 @@
  */
 package com.eliasnogueira.credit.data.provider;
 
-import static org.junit.jupiter.params.provider.Arguments.*;
-
 import com.eliasnogueira.credit.data.factory.SimulationDataFactory;
-import com.eliasnogueira.credit.model.Simulation;
-import java.util.stream.Stream;
 import org.junit.jupiter.params.provider.Arguments;
+
+import java.util.stream.Stream;
+
+import static com.eliasnogueira.credit.data.changeless.SimulationErrorsData.ERRORS_AMOUNT_GREATER;
+import static com.eliasnogueira.credit.data.changeless.SimulationErrorsData.ERRORS_AMOUNT_LESS;
+import static com.eliasnogueira.credit.data.changeless.SimulationErrorsData.ERRORS_CPF;
+import static com.eliasnogueira.credit.data.changeless.SimulationErrorsData.ERRORS_EMAIL;
+import static com.eliasnogueira.credit.data.changeless.SimulationErrorsData.ERRORS_INSTALLMENTS_GREATER;
+import static com.eliasnogueira.credit.data.changeless.SimulationErrorsData.ERRORS_INSTALLMENTS_LESS;
+import static com.eliasnogueira.credit.data.changeless.SimulationErrorsData.ERRORS_NAME;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class SimulationDataProvider {
 
@@ -36,24 +43,24 @@ public class SimulationDataProvider {
     }
 
     public static Stream<Arguments> failedValidations() {
-        SimulationDataFactory simulationDataFactory = new SimulationDataFactory();
+        var simulationDataFactory = new SimulationDataFactory();
 
-        Simulation simulationLessThanMinAmount = simulationDataFactory.simulationLessThanMinAmount();
-        Simulation simulationExceedAmount = simulationDataFactory.simulationExceedAmount();
-        Simulation simulationLessThanMinInstallments = simulationDataFactory.simulationLessThanMinInstallments();
-        Simulation simulationExceedInstallments = simulationDataFactory.simulationExceedInstallments();
-        Simulation simulationWithNotValidEmail = simulationDataFactory.simulationWithNotValidEmail();
-        Simulation simulationWithEmptyCPF = simulationDataFactory.simulationWithEmptyCPF();
-        Simulation simulationWithEmptyName = simulationDataFactory.simulationWithEmptyName();
+        var simulationLessThanMinAmount = simulationDataFactory.simulationLessThanMinAmount();
+        var simulationExceedAmount = simulationDataFactory.simulationExceedAmount();
+        var simulationLessThanMinInstallments = simulationDataFactory.simulationLessThanMinInstallments();
+        var simulationExceedInstallments = simulationDataFactory.simulationExceedInstallments();
+        var simulationWithNotValidEmail = simulationDataFactory.simulationWithNotValidEmail();
+        var simulationWithEmptyCPF = simulationDataFactory.simulationWithEmptyCPF();
+        var simulationWithEmptyName = simulationDataFactory.simulationWithEmptyName();
 
         return Stream.of(
-            arguments(simulationLessThanMinAmount, "errors.amount", "Amount must be equal or greater than $ 1.000"),
-            arguments(simulationExceedAmount, "errors.amount", "Amount must be equal or less than than $ 40.000"),
-            arguments(simulationLessThanMinInstallments, "errors.installments", "Installments must be equal or greater than 2"),
-            arguments(simulationExceedInstallments, "errors.installments", "Installments must be equal or less than 48"),
-            arguments(simulationWithNotValidEmail, "errors.email", "must be a well-formed email address"),
-            arguments(simulationWithEmptyCPF, "errors.cpf", "CPF cannot be empty"),
-            arguments(simulationWithEmptyName, "errors.name", "Name cannot be empty")
+            arguments(simulationLessThanMinAmount, ERRORS_AMOUNT_GREATER.key, ERRORS_AMOUNT_GREATER.message),
+            arguments(simulationExceedAmount, ERRORS_AMOUNT_LESS.key, ERRORS_AMOUNT_LESS.message),
+            arguments(simulationLessThanMinInstallments, ERRORS_INSTALLMENTS_GREATER.key, ERRORS_INSTALLMENTS_GREATER.message),
+            arguments(simulationExceedInstallments, ERRORS_INSTALLMENTS_LESS.key, ERRORS_INSTALLMENTS_LESS.message),
+            arguments(simulationWithNotValidEmail, ERRORS_EMAIL.key, ERRORS_EMAIL.message),
+            arguments(simulationWithEmptyCPF, ERRORS_CPF.key, ERRORS_CPF.message),
+            arguments(simulationWithEmptyName, ERRORS_NAME.key, ERRORS_NAME.message)
         );
     }
 }

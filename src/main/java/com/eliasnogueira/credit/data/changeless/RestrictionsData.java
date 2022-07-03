@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2020 Elias Nogueira
+ * Copyright (c) 2022 Elias Nogueira
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,12 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.eliasnogueira.credit.restrictions;
+package com.eliasnogueira.credit.data.changeless;
 
-import com.eliasnogueira.credit.BaseAPI;
-import com.eliasnogueira.credit.data.factory.RestrictionDataFactory;
+public final class RestrictionsData {
 
-public abstract class RestrictionsBase extends BaseAPI {
+    private RestrictionsData() {
+    }
 
-    protected final RestrictionDataFactory restrictionDataFactory = new RestrictionDataFactory();
+    public static final String SERVICE = "/restrictions";
+    public static final String GET_RESTRICTIONS = String.format("%s/{cpf}", SERVICE);
+    public static final String CPF = "cpf";
 }

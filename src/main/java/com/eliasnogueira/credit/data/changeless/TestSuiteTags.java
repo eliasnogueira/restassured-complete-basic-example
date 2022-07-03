@@ -21,12 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.eliasnogueira.credit.restrictions;
+package com.eliasnogueira.credit.data.changeless;
 
-import com.eliasnogueira.credit.BaseAPI;
-import com.eliasnogueira.credit.data.factory.RestrictionDataFactory;
+public final class TestSuiteTags {
 
-public abstract class RestrictionsBase extends BaseAPI {
+    private TestSuiteTags(){}
 
-    protected final RestrictionDataFactory restrictionDataFactory = new RestrictionDataFactory();
+    public static final String HEALTH = "health";
+    public static final String CONTRACT = "contract";
+    public static final String FUNCTIONAL = "functional";
+    public static final String E2E = "e2e";
 }

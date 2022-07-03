@@ -36,18 +36,15 @@ public class RestrictionsSpecs {
     }
 
     public static RequestSpecification cpfWithoutRestrictionRequestSpec() {
-        RestrictionDataFactory restrictionDataFactory = new RestrictionDataFactory();
+        var restrictionDataFactory = new RestrictionDataFactory();
 
         return new RequestSpecBuilder().
             addRequestSpecification(InitialStateSpecs.set()).
-            addPathParam("cpf", restrictionDataFactory.cpfWithoutRestriction()).
-            build();
+            addPathParam("cpf", restrictionDataFactory.cpfWithoutRestriction()).build();
     }
 
     public static ResponseSpecification notFoundResponse() {
-        return new ResponseSpecBuilder().
-            expectStatusCode(HttpStatus.SC_NOT_FOUND).
-            build();
+        return new ResponseSpecBuilder().expectStatusCode(HttpStatus.SC_NOT_FOUND).build();
     }
 
 }

@@ -23,9 +23,10 @@
  */
 package com.eliasnogueira.credit.data.support;
 
-import java.util.Random;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.security.SecureRandom;
+
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.IntStream.range;
 
 /**
  * Copied from https://needforjava.wordpress.com/2010/11/24/gerar-e-validar-cpf/
@@ -33,8 +34,8 @@ import java.util.stream.IntStream;
 public class CpfGenerator {
 
     public String generate() {
-        String sbCpfNumber = IntStream.range(0, 9).mapToObj(i -> String.valueOf(new Random().nextInt(9)))
-            .collect(Collectors.joining());
+        String sbCpfNumber = range(0, 9).mapToObj(i -> String.valueOf(new SecureRandom().nextInt(9)))
+            .collect(joining());
 
         return generateDigits(sbCpfNumber);
     }

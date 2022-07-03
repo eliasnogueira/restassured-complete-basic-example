@@ -27,7 +27,6 @@ import static org.hamcrest.CoreMatchers.startsWith;
 
 import com.eliasnogueira.credit.commons.MessageFormat;
 import com.eliasnogueira.credit.data.factory.SimulationDataFactory;
-import com.eliasnogueira.credit.model.Simulation;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
@@ -40,7 +39,7 @@ public class SimulationsSpecs {
     private SimulationsSpecs() {}
 
     public static RequestSpecification postValidSimulation() {
-        Simulation validSimulation = new SimulationDataFactory().validSimulation();
+        var validSimulation = new SimulationDataFactory().validSimulation();
 
         return new RequestSpecBuilder().
             addRequestSpecification(InitialStateSpecs.set()).

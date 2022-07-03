@@ -23,16 +23,17 @@
  */
 package com.eliasnogueira.credit.simulations;
 
-import static io.restassured.RestAssured.given;
-import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
-
-import com.eliasnogueira.credit.data.factory.SimulationDataFactory;
 import com.eliasnogueira.credit.BaseAPI;
+import com.eliasnogueira.credit.data.factory.SimulationDataFactory;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+
+import static com.eliasnogueira.credit.data.changeless.TestSuiteTags.CONTRACT;
+import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 class SimulationsContractTest extends BaseAPI {
 
@@ -44,7 +45,7 @@ class SimulationsContractTest extends BaseAPI {
     }
 
     @Test
-    @Tag("contract")
+    @Tag(CONTRACT)
     @DisplayName("Should validate the simulation schema for GET method")
     void getOneSimulation() {
         String existentCpf = simulationDataFactory.oneExistingSimulation().getCpf();
@@ -57,7 +58,7 @@ class SimulationsContractTest extends BaseAPI {
     }
 
     @Test
-    @Tag("contract")
+    @Tag(CONTRACT)
     @DisplayName("Should validate the simulation schema for non-existing simulation")
     void simulationNotFound() {
         given().
@@ -69,7 +70,7 @@ class SimulationsContractTest extends BaseAPI {
     }
 
     @Test
-    @Tag("contract")
+    @Tag(CONTRACT)
     @DisplayName("Should validate the simulation schema for missing information")
     void simulationWithMissingInformation() {
         given().

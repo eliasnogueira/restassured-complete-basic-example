@@ -23,15 +23,16 @@
  */
 package com.eliasnogueira.credit.restrictions;
 
-import static com.eliasnogueira.credit.data.suite.TestTags.CONTRACT;
-import static io.restassured.RestAssured.basePath;
-import static io.restassured.RestAssured.given;
-import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
-
+import com.eliasnogueira.credit.data.changeless.RestrictionsData;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+
+import static com.eliasnogueira.credit.data.changeless.TestSuiteTags.CONTRACT;
+import static io.restassured.RestAssured.basePath;
+import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 class RestrictionsContractTest extends RestrictionsBase {
 
@@ -42,7 +43,7 @@ class RestrictionsContractTest extends RestrictionsBase {
         given().
             pathParam("cpf", restrictionDataFactory.cpfWithRestriction()).
         when().
-            get("/restrictions/{cpf}").
+            get(RestrictionsData.GET_RESTRICTIONS).
         then().
             body(matchesJsonSchemaInClasspath("schemas/restrictions_v1_schema.json"));
     }
@@ -63,7 +64,7 @@ class RestrictionsContractTest extends RestrictionsBase {
         given().
             pathParam("cpf", restrictionDataFactory.cpfWithRestriction()).
         when().
-            get("/restrictions/{cpf}").
+            get(RestrictionsData.GET_RESTRICTIONS).
         then().
             body(matchesJsonSchemaInClasspath("schemas/restrictions_v1_schema.json"));
     }

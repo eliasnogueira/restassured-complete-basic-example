@@ -52,12 +52,12 @@ If you run `mvn test` all the tests will execute because it's the regular Maven 
 To run different suites based on the groups defined for each test you must inform the property `-Dgroups` and the group names.
 The example below shows how to run the test for each pipeline stage:
 
-| pipeline stage | command |
-|-----|---------|
-| health check tests | `mvn test -Dgroups="health"` |
-| contract tests | `mvn test -Dgroups="contract"` |
-| functional tests | `mvn test -Dgroups="functional"` |
-| e2e tests | `mvn test -Dgroups="e2e"` |
+| pipeline stage     | command                          |
+|--------------------|----------------------------------|
+| health check tests | `mvn test -Dgroups="health"`     |
+| contract tests     | `mvn test -Dgroups="contract"`   |
+| functional tests   | `mvn test -Dgroups="functional"` |
+| e2e tests          | `mvn test -Dgroups="e2e"`        |
 
 ### Generating the test report
 
@@ -137,7 +137,7 @@ The classes `RestrictionsSpecs` and `SimulationsSpecs` contains the implementati
 ### src/test/java
 
 #### e2e
-End to End test using both endpoints to simulate the user journey thought the API.
+End-to-End test using both endpoints to simulate the user journey thought the API.
 
 #### general
 Health check test to assure the endpoint is available.
