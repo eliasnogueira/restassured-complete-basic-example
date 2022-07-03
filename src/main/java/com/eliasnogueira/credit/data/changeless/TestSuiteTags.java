@@ -21,13 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.eliasnogueira.credit.data.suite;
+package com.eliasnogueira.credit.data.changeless;
 
-public class TestTags {
+public final class TestSuiteTags {
 
-    private TestTags(){}
+    private TestSuiteTags(){}
 
-    // tags
     public static final String HEALTH = "health";
     public static final String CONTRACT = "contract";
     public static final String FUNCTIONAL = "functional";
