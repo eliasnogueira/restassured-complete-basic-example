@@ -28,5 +28,5 @@ import com.eliasnogueira.credit.data.factory.SimulationDataFactory;
 
 public abstract class SimulationsBase extends BaseAPI {
 
-    protected final SimulationDataFactory simulationDataFactory = new SimulationDataFactory();;
+    protected final SimulationDataFactory simulationDataFactory = new SimulationDataFactory();
 }

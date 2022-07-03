@@ -54,14 +54,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - Moved `BaseAPI` to `src/test/java`
  - General refactor to change the `BaseAPI` package in the tests and other classes
  - Updated the following library versions
-    - restassured.version-4.3.3
-    - allure.version-2.13.8
+    - `restassured.version-4.3.3`
+    - `allure.version-2.13.8`
     
 ## [2.0.1] - 28-11-2020
 
 ### Changed
  - Updated the following library versions
-    - allure-2.13.7
+    - `allure-2.13.7`
 
 ## [2.2.0] 23-11-2020
 
@@ -70,7 +70,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - Added assertions in `FullSimulationE2ETest`
  - Added disabled description in `RestrictionsContractTest`
  - Updated the following library versions
-    - rest-assured-4.3.2
+    - `rest-assured-4.3.2`
  - Added libraries
     - assertj
     - slf4j

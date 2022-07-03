@@ -34,6 +34,7 @@ import static com.eliasnogueira.credit.data.changeless.SimulationErrorsData.ERRO
 import static com.eliasnogueira.credit.data.changeless.SimulationErrorsData.ERRORS_EMAIL;
 import static com.eliasnogueira.credit.data.changeless.SimulationErrorsData.ERRORS_INSTALLMENTS_GREATER;
 import static com.eliasnogueira.credit.data.changeless.SimulationErrorsData.ERRORS_INSTALLMENTS_LESS;
+import static com.eliasnogueira.credit.data.changeless.SimulationErrorsData.ERRORS_NAME;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class SimulationDataProvider {
@@ -59,7 +60,7 @@ public class SimulationDataProvider {
             arguments(simulationExceedInstallments, ERRORS_INSTALLMENTS_LESS.key, ERRORS_INSTALLMENTS_LESS.message),
             arguments(simulationWithNotValidEmail, ERRORS_EMAIL.key, ERRORS_EMAIL.message),
             arguments(simulationWithEmptyCPF, ERRORS_CPF.key, ERRORS_CPF.message),
-            arguments(simulationWithEmptyName, ERRORS_CPF.key, ERRORS_CPF.message)
+            arguments(simulationWithEmptyName, ERRORS_NAME.key, ERRORS_NAME.message)
         );
     }
 }
