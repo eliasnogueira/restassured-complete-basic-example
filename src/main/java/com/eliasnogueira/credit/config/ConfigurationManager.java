@@ -25,7 +25,7 @@ package com.eliasnogueira.credit.config;
 
 import org.aeonbits.owner.ConfigCache;
 
-public class ConfigurationManager {
+public final class ConfigurationManager {
 
     private ConfigurationManager() {
     }
