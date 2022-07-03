@@ -23,7 +23,7 @@
  */
 package com.eliasnogueira.credit.general;
 
-import static com.eliasnogueira.credit.data.suite.TestTags.HEALTH;
+import static com.eliasnogueira.credit.data.changeless.TestSuiteTags.HEALTH;
 import static io.restassured.RestAssured.basePath;
 import static io.restassured.RestAssured.when;
 import static org.apache.http.HttpStatus.SC_OK;
