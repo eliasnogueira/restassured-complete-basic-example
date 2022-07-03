@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.2] - 03-07-2022
+
+### Added
+- New Data classes in the `changeless` package to deal with duplicated values and error key and messages
+
+### Changed
+- Adoption of the data changeless classes in some code
+- Usage of `var` instead of the class in some fields to reduce the amount of code
+- Update of the following libraries
+  - `restassured.version-5.1.1`
+  - `junit.jupiter.version-5.9.0-M1`
+  - `assertj.version-3.23.1`
+  - `log4j.version-2.18.0`
+  - `allure.version-2.18.1`
+
 ## [2.2.1] - 19-04-2022
 
 ### Changed
