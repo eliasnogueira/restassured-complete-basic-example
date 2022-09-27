@@ -82,9 +82,9 @@ class SimulationsFunctionalTest extends SimulationsBase {
     @Tag(FUNCTIONAL)
     @DisplayName("Should validate all existing simulations")
     void getAllExistingSimulations() {
-        Simulation[] existingSimulations = simulationDataFactory.allExistingSimulations();
+        var existingSimulations = simulationDataFactory.allExistingSimulations();
 
-        Simulation[] simulationsRequested =
+        var simulationsRequested =
             when().
                 get("simulations/").
             then().
