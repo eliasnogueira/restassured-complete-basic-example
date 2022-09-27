@@ -23,7 +23,7 @@
  */
 package com.eliasnogueira.credit.data.factory;
 
-import com.github.javafaker.Faker;
+import net.datafaker.Faker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
