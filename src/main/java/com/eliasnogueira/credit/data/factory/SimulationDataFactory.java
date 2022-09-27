@@ -23,10 +23,9 @@
  */
 package com.eliasnogueira.credit.data.factory;
 
-import com.eliasnogueira.credit.data.support.CpfGenerator;
 import com.eliasnogueira.credit.model.Simulation;
 import com.eliasnogueira.credit.model.SimulationBuilder;
-import com.github.javafaker.Faker;
+import net.datafaker.Faker;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
@@ -34,6 +33,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.security.SecureRandom;
+import java.util.List;
 
 import static io.restassured.RestAssured.when;
 
@@ -55,7 +55,7 @@ public class SimulationDataFactory {
     }
 
     public String notExistentCpf() {
-        String nonExistentCpf = new CpfGenerator().generate();
+        String nonExistentCpf = faker.cpf().valid();
 
         log.info("Not existent CPF in use: {}", nonExistentCpf);
         return nonExistentCpf;
@@ -66,14 +66,14 @@ public class SimulationDataFactory {
     }
 
     public Simulation oneExistingSimulation() {
-        Simulation[] simulations = allSimulationsFromApi();
-        Simulation oneExistingSimulation = simulations[new SecureRandom().nextInt(simulations.length)];
+        var simulations = allSimulationsFromApi();
+        Simulation oneExistingSimulation = simulations.get(new SecureRandom().nextInt(simulations.size()));
 
         log.info(oneExistingSimulation);
         return oneExistingSimulation;
     }
 
-    public Simulation[] allExistingSimulations() {
+    public List<Simulation> allExistingSimulations() {
         return allSimulationsFromApi();
     }
 
@@ -148,8 +148,8 @@ public class SimulationDataFactory {
         return simulationWithMissingInfo;
     }
 
-    private Simulation[] allSimulationsFromApi() {
-        Simulation[] simulations =
+    private List<Simulation> allSimulationsFromApi() {
+        var simulations =
                 when().
                         get("/simulations/").
                         then().
@@ -158,14 +158,14 @@ public class SimulationDataFactory {
                         as(Simulation[].class);
 
         log.info(simulations);
-        return simulations;
+        return List.of(simulations);
     }
 
     private Simulation newSimulation() {
         var newSimulation =
                 new SimulationBuilder().
                         name(faker.name().nameWithMiddle()).
-                        cpf(new CpfGenerator().generate()).
+                        cpf(faker.cpf().valid()).
                         email(faker.internet().emailAddress()).
                         amount(new BigDecimal(faker.number().numberBetween(MIN_AMOUNT, MAX_AMOUNT))).
                         installments(faker.number().numberBetween(MIN_INSTALLMENTS, MAX_INSTALLMENTS)).

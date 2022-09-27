@@ -4,6 +4,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.4] - 27-09-2022
+
+## Changed
+- Adoption of Java 17
+- Replace of JavaFaker by DataFaker at
+  - `RestricitonDataFactory`
+  - `SimulationDataFactory`
+- General refactoring on `SimulationsFunctionalTest`
+- Removed (exclusion) the following libraries as internal dependencies due to security issues, adding them as main dependencies:
+  - `commons-codec-1.15`
+  - `jackson-databind-2.13.4`
+  - `guava-31.1-android`
+  - `jcommander-1.82`
+- Update of the following dependencies
+  - `maven-compiler-plugin-3.10.1`
+  - `maven-surefire-plugin-3.0.0-M7`
+  - `maven-failsafe-plugin-3.0.0-M7`
+  - `restassured-5.2.0`
+  - `junit.jupiter-5.9.1`
+  - `log4j-2.19.0`
+  - `slf4j-2.0.2`
+  - `allure-2.19.0`
+  - `aspectj-1.9.9.1`
+
+## Removed
+- Removed `CpfGenerator` and replaced by the DataFaker `faker.cpf().valid()`
+
 ## [2.2.3] - 03-07-2022
 
 ### Changed
