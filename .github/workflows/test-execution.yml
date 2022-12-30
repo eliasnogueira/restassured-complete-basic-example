@@ -12,8 +12,7 @@ on:
         description: 'Run Tests (y/n)?'
         required: true
         default: 'y'
-services:
-  backend:
+container:
     image: eliasnogueira/combined-credit-api:latest
 jobs:
   build:
