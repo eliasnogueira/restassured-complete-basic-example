@@ -38,6 +38,7 @@ job:
   run-tests:
     runs-on: ubuntu-latest
     container: eliasnogueira/combined-credit-api:latest
+    steps:
       - name: Run Health Check Tests
         run: mvn test -Dgroups="health"
 
