@@ -15,7 +15,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: eliasnogueira/combined-credit-api:latest
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
@@ -35,6 +34,10 @@ jobs:
       - name: Build with Maven
         run: mvn -DskipTests -B package --file pom.xml
 
+job:
+  run-tests:
+    runs-on: ubuntu-latest
+    container: eliasnogueira/combined-credit-api:latest
       - name: Run Health Check Tests
         run: mvn test -Dgroups="health"
 
