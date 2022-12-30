@@ -12,6 +12,9 @@ on:
         description: 'Run Tests (y/n)?'
         required: true
         default: 'y'
+services:
+  backend:
+    image: eliasnogueira/combined-credit-api:latest
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,18 +29,13 @@ jobs:
       - name: Cache Maven packages
         uses: actions/cache@v3
         with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
 
       - name: Build with Maven
         run: mvn -DskipTests -B package --file pom.xml
 
-  run-tests:
-    runs-on: ubuntu-latest
-    container: eliasnogueira/combined-credit-api:latest
-    steps:
       - name: Run Health Check Tests
         run: mvn test -Dgroups="health"
 
@@ -48,4 +46,4 @@ jobs:
         run: mvn test -Dgroups="e2e"
 
       - name: Run Functional Tests
-        run: mvn test -Dgroups="functional"
+        run: mvn test -Dgroups="functional"api/v1 -Dapi.port=443 -Dapi.health.context=/actuator
