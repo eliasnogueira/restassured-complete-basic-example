@@ -12,11 +12,13 @@ on:
         description: 'Run Tests (y/n)?'
         required: true
         default: 'y'
-container:
-    image: eliasnogueira/combined-credit-api:latest
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    services:
+      backend:
+        image: eliasnogueira/combined-credit-api:latest
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
