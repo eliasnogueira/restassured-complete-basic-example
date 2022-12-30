@@ -34,7 +34,6 @@ jobs:
       - name: Build with Maven
         run: mvn -DskipTests -B package --file pom.xml
 
-job:
   run-tests:
     runs-on: ubuntu-latest
     container: eliasnogueira/combined-credit-api:latest
