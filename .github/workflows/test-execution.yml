@@ -12,9 +12,15 @@ on:
         description: 'Run Tests (y/n)?'
         required: true
         default: 'y'
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    services:
+      credit-api:
+        image: eliasnogueira/combined-credit-api:latest
+        ports:
+          - 8088:8088
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
@@ -22,19 +28,30 @@ jobs:
         with:
           java-version: 17
           distribution: adopt
+
       - name: Cache Maven packages
         uses: actions/cache@v3
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
+
+      - name: Wait for the backend service to start
+        run: wget -qO- https://raw.githubusercontent.com/eficode/wait-for/$WAIT_FOR_VERSION/wait-for | sh -s -- http://localhost:8088/actuator/health -t 30 -- echo "Backend is up"
+        env:
+          WAIT_FOR_VERSION: 4df3f9262d84cab0039c07bf861045fbb3c20ab7
+
       - name: Build with Maven
-        run: mvn -DskipTests -B package --file pom.xml
+        run: mvn -B -DskipTests package --file pom.xml
+
       - name: Run Health Check Tests
-        run: mvn test -Dgroups="health" -Dapi.base.uri=https://eliasnogueira-credit-api.herokuapp.com -Dapi.base.path=/api/v1 -Dapi.port=443 -Dapi.health.context=/actuator
+        run: mvn -B test -Dgroups="health"
+
       - name: Run Contract Tests
-        run: mvn test -Dgroups="contract" -Dapi.base.uri=https://eliasnogueira-credit-api.herokuapp.com -Dapi.base.path=/api/v1 -Dapi.port=443 -Dapi.health.context=/actuator
+        run: mvn -B test -Dgroups="contract"
+
       - name: Run E2E Tests
-        run: mvn test -Dgroups="e2e" -Dapi.base.uri=https://eliasnogueira-credit-api.herokuapp.com -Dapi.base.path=/api/v1 -Dapi.port=443 -Dapi.health.context=/actuator
+        run: mvn -B test -Dgroups="e2e"
+
       - name: Run Functional Tests
-        run: mvn test -Dgroups="functional" -Dapi.base.uri=https://eliasnogueira-credit-api.herokuapp.com -Dapi.base.path=/api/v1 -Dapi.port=443 -Dapi.health.context=/actuator
+        run: mvn -B test -Dgroups="functional"

@@ -111,7 +111,7 @@ public class SimulationDataFactory {
 
     public Simulation simulationWithNotValidEmail() {
         var simulationWithNotValidEmail = validSimulation();
-        simulationWithNotValidEmail.setEmail(faker.name().username());
+        simulationWithNotValidEmail.setEmail(faker.name().username() + "@");
 
         log.info(simulationWithNotValidEmail);
         return simulationWithNotValidEmail;
@@ -151,7 +151,7 @@ public class SimulationDataFactory {
     private List<Simulation> allSimulationsFromApi() {
         var simulations =
                 when().
-                        get("/simulations/").
+                        get("/simulations").
                         then().
                         statusCode(HttpStatus.SC_OK).
                         extract().

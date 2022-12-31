@@ -86,7 +86,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
 
         var simulationsRequested =
             when().
-                get("simulations/").
+                get("simulations").
             then().
                 statusCode(SC_OK).
                 extract().
@@ -172,7 +172,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
             contentType(ContentType.JSON).
             body(existingSimulation).
         when().
-            post("/simulations/").
+            post("/simulations").
         then().
             statusCode(SC_CONFLICT).
             body("message", is("CPF already exists"));
