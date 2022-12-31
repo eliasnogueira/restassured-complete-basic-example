@@ -35,7 +35,7 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Build with Maven
-        run: mvn -DskipTests -B package --file pom.xml
+        run: mvn -DskipTests package --file pom.xml
 
       - name: Run Health Check Tests
         run: mvn test -Dgroups="health"
