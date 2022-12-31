@@ -19,6 +19,8 @@ jobs:
     services:
       credit-api:
         image: eliasnogueira/combined-credit-api:latest
+        ports:
+          - 8088:8088
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 17
