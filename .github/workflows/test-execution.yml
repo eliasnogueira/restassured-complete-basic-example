@@ -35,7 +35,9 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Wait for the backend service to start
-        run: wget -qO- https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh | sh -s -- localhost:8088/api/v1/actuator/health -- echo "Backend is up"
+        run: wget -qO- https://raw.githubusercontent.com/eficode/wait-for/$WAIT_FOR_VERSION/wait-for | sh -s -- localhost:8088/api/v1/actuator/health -- echo "Database is up"
+        env:
+          WAIT_FOR_VERSION: 4df3f9262d84cab0039c07bf861045fbb3c20ab7
 
       - name: Build with Maven
         run: mvn -B -DskipTests package --file pom.xml
