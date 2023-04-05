@@ -102,7 +102,7 @@ The second will load the `api.properties` file from the classpath.
 The environment variable is read on the `ConfiguratorManager`.
 This class reduces the amount of code necessary to get any information on the properties file.
 
-This strategy uses [Owner](http://owner.aeonbits.org/) library
+This strategy uses [Owner](https://matteobaccan.github.io/owner/) library
 
 #### data
 
@@ -154,7 +154,7 @@ It has a `schemas` folder with the JSON Schemas to enable Contract Testing using
 ## Libraries
 * [RestAssured](http://rest-assured.io/) library to test REST APIs
 * [JUnit 5](https://junit.org/junit5/) to support the test creation
-* [Owner](http://owner.aeonbits.org/) to manage the property files
+* [Owner](https://matteobaccan.github.io/owner/) to manage the property files
 * [java-faker](https://github.com/DiUS/java-faker) to generate fake data
 * [Log4J2](https://logging.apache.org/log4j/2.x/) as the logging strategy
 * [Allure Report](https://docs.qameta.io/allure/) as the testing report strategy
