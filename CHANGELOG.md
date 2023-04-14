@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.5] - 14-03-2023
+
+## Changed
+- Update the following dependencies
+ - `allure-maven -> 2.12.0`
+ - `allure -> 2.21.0`
+ - `aspectj -> 1.9.19`
+ - `assertj -> 3.24.2`
+ - `datafaker -> 1.8.1`
+ - `junit.jupiter -> 5.9.2`
+ - `log4j -> 2.20.0`
+ - `maven-compiler-plugin -> 3.11.0`
+ - `maven-surefire-plugin -> 3.0.0`
+ - `slf4j -> 2.0.7`
+- Added quiet mode in all Maven commands in the GitHub workflow
+
 ## [2.2.4] - 27-09-2022
 
 ## Changed
