@@ -77,7 +77,7 @@ class SimulationsContractTest extends BaseAPI {
             contentType(ContentType.JSON).
             body(simulationDataFactory.missingAllInformation()).
         when().
-            post("/simulations").
+            post("/simulations/").
         then().
             body(matchesJsonSchemaInClasspath("schemas/simulations_missing_info_v1_schema.json"));
     }

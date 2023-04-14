@@ -102,7 +102,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
         given().
             queryParam("name", simulationDataFactory.nonExistentName()).
         when().
-            get("/simulations").
+            get("/simulations/").
         then().
             statusCode(SC_NOT_FOUND);
     }
@@ -116,7 +116,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
         given().
             queryParam("name", existingSimulation.getName()).
         when().
-            get("/simulations").
+            get("/simulations/").
         then().
             statusCode(SC_OK).
             body(
@@ -142,7 +142,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
             contentType(ContentType.JSON).
             body(simulation).
         when().
-            post("/simulations").
+            post("/simulations/").
         then().
             statusCode(SC_CREATED).
             header("Location", containsString(MessageFormat.locationURLByEnvironment()));
@@ -157,7 +157,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
             contentType(ContentType.JSON).
             body(invalidSimulation).
         when().
-            post("/simulations").
+            post("/simulations/").
         then().
             statusCode(SC_UNPROCESSABLE_ENTITY).
             body(path, is(validationMessage));
@@ -172,7 +172,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
             contentType(ContentType.JSON).
             body(existingSimulation).
         when().
-            post("/simulations").
+            post("/simulations/").
         then().
             statusCode(SC_CONFLICT).
             body("message", is("CPF already exists"));
