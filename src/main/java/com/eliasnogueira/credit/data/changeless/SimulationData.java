@@ -28,5 +28,5 @@ public final class SimulationData {
     private SimulationData() {
     }
 
-    public static final String SERVICE = "/simulations";
+    public static final String SERVICE = "/simulations/";
 }
