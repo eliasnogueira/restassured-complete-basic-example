@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - `maven-surefire-plugin -> 3.0.0`
  - `slf4j -> 2.0.7`
 - Added quiet mode in all Maven commands in the GitHub workflow
+- Removed CPF validations as it now returns HTTP 403 handled by the Restrictions controller
+- Fix the Simulations endpoints in several classes
 
 ## [2.2.4] - 27-09-2022
 
