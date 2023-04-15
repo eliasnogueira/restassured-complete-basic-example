@@ -24,6 +24,7 @@
 package com.eliasnogueira.credit.simulations;
 
 import com.eliasnogueira.credit.commons.MessageFormat;
+import com.eliasnogueira.credit.data.provider.SimulationDataProvider;
 import com.eliasnogueira.credit.model.Simulation;
 import io.restassured.http.ContentType;
 import org.assertj.core.api.Assertions;
@@ -31,7 +32,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ArgumentsSource;
 
 import static com.eliasnogueira.credit.data.changeless.TestSuiteTags.FUNCTIONAL;
 import static io.restassured.RestAssured.given;
@@ -48,9 +49,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 class SimulationsFunctionalTest extends SimulationsBase {
-
-    private static final String FAILED_VALIDATION =
-        "com.eliasnogueira.credit.data.provider.SimulationDataProvider#failedValidations";
 
     /*
      * not that, in order to assert the amount without problem, we must enable a configuration
@@ -86,7 +84,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
 
         var simulationsRequested =
             when().
-                get("simulations").
+                get("/simulations/").
             then().
                 statusCode(SC_OK).
                 extract().
@@ -150,7 +148,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
 
     @Tag(FUNCTIONAL)
     @ParameterizedTest(name = "Scenario: {2}")
-    @MethodSource(value = FAILED_VALIDATION)
+    @ArgumentsSource(SimulationDataProvider.class)
     @DisplayName("Should validate all the invalid scenarios")
     void invalidSimulations(Simulation invalidSimulation, String path, String validationMessage) {
         given().

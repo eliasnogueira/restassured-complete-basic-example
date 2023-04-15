@@ -24,7 +24,9 @@
 package com.eliasnogueira.credit.data.provider;
 
 import com.eliasnogueira.credit.data.factory.SimulationDataFactory;
+import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.ArgumentsProvider;
 
 import java.util.stream.Stream;
 
@@ -37,12 +39,10 @@ import static com.eliasnogueira.credit.data.changeless.SimulationErrorsData.ERRO
 import static com.eliasnogueira.credit.data.changeless.SimulationErrorsData.ERRORS_NAME;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-public class SimulationDataProvider {
+public class SimulationDataProvider implements ArgumentsProvider {
 
-    private SimulationDataProvider() {
-    }
-
-    public static Stream<Arguments> failedValidations() {
+    @Override
+    public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) throws Exception {
         var simulationDataFactory = new SimulationDataFactory();
 
         var simulationLessThanMinAmount = simulationDataFactory.simulationLessThanMinAmount();
@@ -50,17 +50,15 @@ public class SimulationDataProvider {
         var simulationLessThanMinInstallments = simulationDataFactory.simulationLessThanMinInstallments();
         var simulationExceedInstallments = simulationDataFactory.simulationExceedInstallments();
         var simulationWithNotValidEmail = simulationDataFactory.simulationWithNotValidEmail();
-        var simulationWithEmptyCPF = simulationDataFactory.simulationWithEmptyCPF();
         var simulationWithEmptyName = simulationDataFactory.simulationWithEmptyName();
 
         return Stream.of(
-            arguments(simulationLessThanMinAmount, ERRORS_AMOUNT_GREATER.key, ERRORS_AMOUNT_GREATER.message),
-            arguments(simulationExceedAmount, ERRORS_AMOUNT_LESS.key, ERRORS_AMOUNT_LESS.message),
-            arguments(simulationLessThanMinInstallments, ERRORS_INSTALLMENTS_GREATER.key, ERRORS_INSTALLMENTS_GREATER.message),
-            arguments(simulationExceedInstallments, ERRORS_INSTALLMENTS_LESS.key, ERRORS_INSTALLMENTS_LESS.message),
-            arguments(simulationWithNotValidEmail, ERRORS_EMAIL.key, ERRORS_EMAIL.message),
-            arguments(simulationWithEmptyCPF, ERRORS_CPF.key, ERRORS_CPF.message),
-            arguments(simulationWithEmptyName, ERRORS_NAME.key, ERRORS_NAME.message)
+                arguments(simulationLessThanMinAmount, ERRORS_AMOUNT_GREATER.key, ERRORS_AMOUNT_GREATER.message),
+                arguments(simulationExceedAmount, ERRORS_AMOUNT_LESS.key, ERRORS_AMOUNT_LESS.message),
+                arguments(simulationLessThanMinInstallments, ERRORS_INSTALLMENTS_GREATER.key, ERRORS_INSTALLMENTS_GREATER.message),
+                arguments(simulationExceedInstallments, ERRORS_INSTALLMENTS_LESS.key, ERRORS_INSTALLMENTS_LESS.message),
+                arguments(simulationWithNotValidEmail, ERRORS_EMAIL.key, ERRORS_EMAIL.message),
+                arguments(simulationWithEmptyName, ERRORS_NAME.key, ERRORS_NAME.message)
         );
     }
 }
