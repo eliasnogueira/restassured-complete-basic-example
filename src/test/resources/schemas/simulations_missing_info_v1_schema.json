@@ -10,7 +10,6 @@
       "required": [
         "amount",
         "installments",
-        "cpf",
         "name",
         "email"
       ],
@@ -19,9 +18,6 @@
           "type": "string"
         },
         "installments": {
-          "type": "string"
-        },
-        "cpf": {
           "type": "string"
         },
         "name": {
