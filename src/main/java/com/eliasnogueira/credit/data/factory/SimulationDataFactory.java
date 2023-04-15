@@ -117,14 +117,6 @@ public class SimulationDataFactory {
         return simulationWithNotValidEmail;
     }
 
-    public Simulation simulationWithEmptyCPF() {
-        var simulationWithEmptyCPF = validSimulation();
-        simulationWithEmptyCPF.setCpf(StringUtils.EMPTY);
-
-        log.info(simulationWithEmptyCPF);
-        return simulationWithEmptyCPF;
-    }
-
     public Simulation simulationWithEmptyName() {
         var simulationWithEmptyName = validSimulation();
         simulationWithEmptyName.setName(StringUtils.EMPTY);
@@ -136,7 +128,7 @@ public class SimulationDataFactory {
     public Simulation missingAllInformation() {
         var simulationWithMissingInfo =
                 new SimulationBuilder().
-                        cpf(StringUtils.EMPTY).
+                        cpf(faker.cpf().valid()).
                         name(StringUtils.EMPTY).
                         email(faker.name().username()).
                         amount(new BigDecimal(faker.number().numberBetween(1, MIN_AMOUNT - 1))).
