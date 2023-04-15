@@ -26,7 +26,6 @@ package com.eliasnogueira.credit.simulations;
 import com.eliasnogueira.credit.BaseAPI;
 import com.eliasnogueira.credit.data.factory.SimulationDataFactory;
 import io.restassured.http.ContentType;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -37,18 +36,11 @@ import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInC
 
 class SimulationsContractTest extends BaseAPI {
 
-    private static SimulationDataFactory simulationDataFactory;
-
-    @BeforeAll
-    static void setup() {
-        simulationDataFactory = new SimulationDataFactory();
-    }
-
     @Test
     @Tag(CONTRACT)
     @DisplayName("Should validate the simulation schema for GET method")
     void getOneSimulation() {
-        String existentCpf = simulationDataFactory.oneExistingSimulation().getCpf();
+        String existentCpf = SimulationDataFactory.oneExistingSimulation().getCpf();
         given().
             pathParam("cpf", existentCpf).
         when().
@@ -62,7 +54,7 @@ class SimulationsContractTest extends BaseAPI {
     @DisplayName("Should validate the simulation schema for non-existing simulation")
     void simulationNotFound() {
         given().
-            pathParam("cpf", simulationDataFactory.notExistentCpf()).
+            pathParam("cpf", SimulationDataFactory.notExistentCpf()).
         when().
             get("/simulations/{cpf}").
         then().
@@ -75,7 +67,7 @@ class SimulationsContractTest extends BaseAPI {
     void simulationWithMissingInformation() {
         given().
             contentType(ContentType.JSON).
-            body(simulationDataFactory.missingAllInformation()).
+            body(SimulationDataFactory.missingAllInformation()).
         when().
             post("/simulations/").
         then().

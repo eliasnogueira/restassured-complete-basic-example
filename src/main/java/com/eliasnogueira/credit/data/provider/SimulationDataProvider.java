@@ -32,7 +32,6 @@ import java.util.stream.Stream;
 
 import static com.eliasnogueira.credit.data.changeless.SimulationErrorsData.ERRORS_AMOUNT_GREATER;
 import static com.eliasnogueira.credit.data.changeless.SimulationErrorsData.ERRORS_AMOUNT_LESS;
-import static com.eliasnogueira.credit.data.changeless.SimulationErrorsData.ERRORS_CPF;
 import static com.eliasnogueira.credit.data.changeless.SimulationErrorsData.ERRORS_EMAIL;
 import static com.eliasnogueira.credit.data.changeless.SimulationErrorsData.ERRORS_INSTALLMENTS_GREATER;
 import static com.eliasnogueira.credit.data.changeless.SimulationErrorsData.ERRORS_INSTALLMENTS_LESS;
@@ -42,15 +41,14 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 public class SimulationDataProvider implements ArgumentsProvider {
 
     @Override
-    public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) throws Exception {
-        var simulationDataFactory = new SimulationDataFactory();
+    public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) {
 
-        var simulationLessThanMinAmount = simulationDataFactory.simulationLessThanMinAmount();
-        var simulationExceedAmount = simulationDataFactory.simulationExceedAmount();
-        var simulationLessThanMinInstallments = simulationDataFactory.simulationLessThanMinInstallments();
-        var simulationExceedInstallments = simulationDataFactory.simulationExceedInstallments();
-        var simulationWithNotValidEmail = simulationDataFactory.simulationWithNotValidEmail();
-        var simulationWithEmptyName = simulationDataFactory.simulationWithEmptyName();
+        var simulationLessThanMinAmount = SimulationDataFactory.simulationLessThanMinAmount();
+        var simulationExceedAmount = SimulationDataFactory.simulationExceedAmount();
+        var simulationLessThanMinInstallments = SimulationDataFactory.simulationLessThanMinInstallments();
+        var simulationExceedInstallments = SimulationDataFactory.simulationExceedInstallments();
+        var simulationWithNotValidEmail = SimulationDataFactory.simulationWithNotValidEmail();
+        var simulationWithEmptyName = SimulationDataFactory.simulationWithEmptyName();
 
         return Stream.of(
                 arguments(simulationLessThanMinAmount, ERRORS_AMOUNT_GREATER.key, ERRORS_AMOUNT_GREATER.message),

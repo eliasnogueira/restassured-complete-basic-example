@@ -24,6 +24,7 @@
 package com.eliasnogueira.credit.simulations;
 
 import com.eliasnogueira.credit.commons.MessageFormat;
+import com.eliasnogueira.credit.data.factory.SimulationDataFactory;
 import com.eliasnogueira.credit.data.provider.SimulationDataProvider;
 import com.eliasnogueira.credit.model.Simulation;
 import io.restassured.http.ContentType;
@@ -58,7 +59,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
     @Tag(FUNCTIONAL)
     @DisplayName("Should validate one existing simulation")
     void getOneExistingSimulation() {
-        var existingSimulation = simulationDataFactory.oneExistingSimulation();
+        var existingSimulation = SimulationDataFactory.oneExistingSimulation();
 
         given().
             pathParam("cpf", existingSimulation.getCpf()).
@@ -80,7 +81,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
     @Tag(FUNCTIONAL)
     @DisplayName("Should validate all existing simulations")
     void getAllExistingSimulations() {
-        var existingSimulations = simulationDataFactory.allExistingSimulations();
+        var existingSimulations = SimulationDataFactory.allExistingSimulations();
 
         var simulationsRequested =
             when().
@@ -98,7 +99,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
     @DisplayName("Should filter by name a non-existing simulation")
     void simulationByNameNotFound() {
         given().
-            queryParam("name", simulationDataFactory.nonExistentName()).
+            queryParam("name", SimulationDataFactory.nonExistentName()).
         when().
             get("/simulations/").
         then().
@@ -109,7 +110,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
     @Tag(FUNCTIONAL)
     @DisplayName("Should find a simulation filtered by name")
     void returnSimulationByName() {
-        var existingSimulation = simulationDataFactory.oneExistingSimulation();
+        var existingSimulation = SimulationDataFactory.oneExistingSimulation();
 
         given().
             queryParam("name", existingSimulation.getName()).
@@ -134,7 +135,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
     @Tag(FUNCTIONAL)
     @DisplayName("Should create a new simulation")
     void createNewSimulationSuccessfully() {
-        var simulation = simulationDataFactory.validSimulation();
+        var simulation = SimulationDataFactory.validSimulation();
 
         given().
             contentType(ContentType.JSON).
@@ -165,7 +166,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
     @Tag(FUNCTIONAL)
     @DisplayName("Should validate an CFP duplication")
     void simulationWithDuplicatedCpf() {
-        var existingSimulation = simulationDataFactory.oneExistingSimulation();
+        var existingSimulation = SimulationDataFactory.oneExistingSimulation();
         given().
             contentType(ContentType.JSON).
             body(existingSimulation).
@@ -180,7 +181,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
     @Tag(FUNCTIONAL)
     @DisplayName("Should delete an existing simulation")
     void deleteSimulationSuccessfully() {
-        var existingSimulation = simulationDataFactory.oneExistingSimulation();
+        var existingSimulation = SimulationDataFactory.oneExistingSimulation();
 
         given().
             pathParam("cpf", existingSimulation.getCpf()).
@@ -195,7 +196,7 @@ class SimulationsFunctionalTest extends SimulationsBase {
     @DisplayName("Should validate the return when a non-existent simulation is sent")
     void notFoundWhenDeleteSimulation() {
         given().
-            pathParam("cpf", simulationDataFactory.notExistentCpf()).
+            pathParam("cpf", SimulationDataFactory.notExistentCpf()).
         when().
             delete("/simulations/{cpf}").
         then().
@@ -206,9 +207,9 @@ class SimulationsFunctionalTest extends SimulationsBase {
     @Tag(FUNCTIONAL)
     @DisplayName("Should update an existing simulation")
     void changeSimulationSuccessfully() {
-        var existingSimulation = simulationDataFactory.oneExistingSimulation();
+        var existingSimulation = SimulationDataFactory.oneExistingSimulation();
 
-        var simulation = simulationDataFactory.validSimulation();
+        var simulation = SimulationDataFactory.validSimulation();
         simulation.setCpf(existingSimulation.getCpf());
         simulation.setInsurance(existingSimulation.getInsurance());
 
@@ -232,11 +233,11 @@ class SimulationsFunctionalTest extends SimulationsBase {
     @Tag(FUNCTIONAL)
     @DisplayName("Should validate the return of an update for a non-existent CPF")
     void changeSimulationCpfNotFound() {
-        var simulation = simulationDataFactory.validSimulation();
+        var simulation = SimulationDataFactory.validSimulation();
 
         given().
             contentType(ContentType.JSON).
-            pathParam("cpf", simulationDataFactory.notExistentCpf()).
+            pathParam("cpf", SimulationDataFactory.notExistentCpf()).
             body(simulation).
         when().
             put("/simulations/{cpf}").
