@@ -44,8 +44,8 @@ public class MessageFormat {
         var configuration = ConfigurationManager.getConfiguration();
 
         locationURL = configuration.port() < 8000
-                ? format("{0}{1}{2}/", configuration.baseURI(), configuration.basePath(), SimulationData.SERVICE)
-                : format("{0}:{1}{2}{3}/", configuration.baseURI(), String.valueOf(configuration.port()), configuration.basePath(), SimulationData.SERVICE);
+                ? format("{0}{1}{2}", configuration.baseURI(), configuration.basePath(), SimulationData.SERVICE)
+                : format("{0}:{1}{2}{3}", configuration.baseURI(), String.valueOf(configuration.port()), configuration.basePath(), SimulationData.SERVICE);
 
         log.debug(locationURL);
         return locationURL;
