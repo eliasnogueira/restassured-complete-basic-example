@@ -27,7 +27,7 @@ It tests the API: [combined-credit-api](https://github.com/eliasnogueira/combine
 > but the central point of this repository and demonstrate an example of running tests for API in a pipeline
 
 ## Required software
-* Java JDK 11+
+* Java JDK 17+
 * Maven installed and in your classpath
 * Clone/download the backend API [combined-credit-api](https://github.com/eliasnogueira/combined-credit-api)
 
