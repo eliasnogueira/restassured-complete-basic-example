@@ -37,7 +37,7 @@ import java.util.List;
 
 import static io.restassured.RestAssured.when;
 
-public class SimulationDataFactory {
+public final class SimulationDataFactory {
 
     private static final Logger log = LogManager.getLogger(SimulationDataFactory.class);
 
@@ -46,6 +46,9 @@ public class SimulationDataFactory {
     private static final int MIN_INSTALLMENTS = 2;
     private static final int MAX_INSTALLMENTS = 48;
     private static final Faker faker = new Faker();
+
+    private SimulationDataFactory() {
+    }
 
     public static String nonExistentName() {
         String nonExistentName = faker.name().firstName();
