@@ -27,9 +27,14 @@ It tests the API: [combined-credit-api](https://github.com/eliasnogueira/combine
 > but the central point of this repository and demonstrate an example of running tests for API in a pipeline
 
 ## Required software
-* Java JDK 17+
+* Java JDK 21+
 * Maven installed and in your classpath
 * Clone/download the backend API [combined-credit-api](https://github.com/eliasnogueira/combined-credit-api)
+
+> :notebook: **Note**
+>
+> You can use Java 17 if you want
+
 
 ## How to execute the tests
 You can open each test class on `src\test\java` and execute all of them, but I recommend you run it by the
