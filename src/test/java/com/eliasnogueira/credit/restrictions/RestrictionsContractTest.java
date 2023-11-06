@@ -23,7 +23,9 @@
  */
 package com.eliasnogueira.credit.restrictions;
 
+import com.eliasnogueira.credit.BaseAPI;
 import com.eliasnogueira.credit.data.changeless.RestrictionsData;
+import com.eliasnogueira.credit.data.factory.RestrictionDataFactory;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -34,14 +36,14 @@ import static io.restassured.RestAssured.basePath;
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
-class RestrictionsContractTest extends RestrictionsBase {
+class RestrictionsContractTest extends BaseAPI {
 
     @Test
     @Tag(CONTRACT)
     @DisplayName("Should validate the restrictions schema for GET method in v1")
     void contractOnV1() {
         given().
-            pathParam("cpf", restrictionDataFactory.cpfWithRestriction()).
+            pathParam("cpf", RestrictionDataFactory.cpfWithRestriction()).
         when().
             get(RestrictionsData.GET_RESTRICTIONS).
         then().
@@ -62,7 +64,7 @@ class RestrictionsContractTest extends RestrictionsBase {
         basePath = "/api/v2";
 
         given().
-            pathParam("cpf", restrictionDataFactory.cpfWithRestriction()).
+            pathParam("cpf", RestrictionDataFactory.cpfWithRestriction()).
         when().
             get(RestrictionsData.GET_RESTRICTIONS).
         then().

@@ -36,11 +36,10 @@ public class RestrictionsSpecs {
     }
 
     public static RequestSpecification cpfWithoutRestrictionRequestSpec() {
-        var restrictionDataFactory = new RestrictionDataFactory();
 
         return new RequestSpecBuilder().
             addRequestSpecification(InitialStateSpecs.set()).
-            addPathParam("cpf", restrictionDataFactory.cpfWithoutRestriction()).build();
+            addPathParam("cpf", RestrictionDataFactory.cpfWithoutRestriction()).build();
     }
 
     public static ResponseSpecification notFoundResponse() {

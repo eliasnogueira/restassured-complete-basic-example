@@ -39,7 +39,7 @@ public class SimulationsSpecs {
     private SimulationsSpecs() {}
 
     public static RequestSpecification postValidSimulation() {
-        var validSimulation = new SimulationDataFactory().validSimulation();
+        var validSimulation = SimulationDataFactory.validSimulation();
 
         return new RequestSpecBuilder().
             addRequestSpecification(InitialStateSpecs.set()).

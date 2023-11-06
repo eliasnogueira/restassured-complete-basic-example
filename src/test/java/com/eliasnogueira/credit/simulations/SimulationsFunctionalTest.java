@@ -23,6 +23,7 @@
  */
 package com.eliasnogueira.credit.simulations;
 
+import com.eliasnogueira.credit.BaseAPI;
 import com.eliasnogueira.credit.commons.MessageFormat;
 import com.eliasnogueira.credit.data.factory.SimulationDataFactory;
 import com.eliasnogueira.credit.data.provider.SimulationDataProvider;
@@ -49,7 +50,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-class SimulationsFunctionalTest extends SimulationsBase {
+class SimulationsFunctionalTest extends BaseAPI {
 
     /*
      * not that, in order to assert the amount without problem, we must enable a configuration

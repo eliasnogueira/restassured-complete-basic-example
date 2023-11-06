@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.0] - 06-11-2023
+
+## Changed
+- Set Java version as 21 in the `pom.xml` and `.github/workflows/test-execution.yml`
+- Updated Maven Wrapper
+- Updated the following dependencies
+  - `maven-surefire-plugin.version -> 3.2.1`
+  - `maven-failsafe-plugin.version -> 3.2.1`
+  - `restassured.version -> 5.3.2`
+  - `junit.jupiter.version -> 5.10.1`
+  - `datafaker.version -> 2.0.2`
+  - `slf4j.version -> 2.0.9`
+  - `allure.version -> 2.24.0`
+  - `aspectj.version -> 1.9.20.1`
+
+## Removed
+- Removed custom BaseTest classes for Restrictions and Simulations as the data factories shouldn't be instantiated
+
 ## [2.2.6] - 06-06-2023
 
 ## Changed

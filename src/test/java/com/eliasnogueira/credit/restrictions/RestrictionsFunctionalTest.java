@@ -23,7 +23,9 @@
  */
 package com.eliasnogueira.credit.restrictions;
 
+import com.eliasnogueira.credit.BaseAPI;
 import com.eliasnogueira.credit.data.changeless.RestrictionsData;
+import com.eliasnogueira.credit.data.factory.RestrictionDataFactory;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -35,14 +37,14 @@ import static com.eliasnogueira.credit.data.changeless.TestSuiteTags.FUNCTIONAL;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
 
-class RestrictionsFunctionalTest extends RestrictionsBase {
+class RestrictionsFunctionalTest extends BaseAPI {
 
     @Test
     @Tag(FUNCTIONAL)
     @DisplayName("Should query a CPF without restriction")
     void cpfWithNoRestriction() {
         given().
-            pathParam(RestrictionsData.CPF, restrictionDataFactory.cpfWithoutRestriction()).
+            pathParam(RestrictionsData.CPF, RestrictionDataFactory.cpfWithoutRestriction()).
         when().
             get(RestrictionsData.GET_RESTRICTIONS).
         then()
@@ -53,7 +55,7 @@ class RestrictionsFunctionalTest extends RestrictionsBase {
     @Tag(FUNCTIONAL)
     @DisplayName("Should query a CPF with restriction")
     void cpfWithRestriction() {
-        String cpfWithRestriction = restrictionDataFactory.cpfWithRestriction();
+        String cpfWithRestriction = RestrictionDataFactory.cpfWithRestriction();
 
         given().
             pathParam(RestrictionsData.CPF, cpfWithRestriction).

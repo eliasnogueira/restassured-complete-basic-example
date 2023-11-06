@@ -31,19 +31,22 @@ import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.List;
 
-public class RestrictionDataFactory {
+public final class RestrictionDataFactory {
 
-    private final Faker faker = new Faker();
+    private static final Faker faker = new Faker();
     private static final Logger log = LogManager.getLogger(RestrictionDataFactory.class);
 
-    public String cpfWithoutRestriction() {
+    private RestrictionDataFactory() {
+    }
+
+    public static String cpfWithoutRestriction() {
         String cpf = String.valueOf(faker.number().randomNumber(11, false));
 
         log.info("CPF without restriction in use: {}", cpf);
         return cpf;
     }
 
-    public String cpfWithRestriction() {
+    public static String cpfWithRestriction() {
         List<String> cpfWithRestriction =
                 Arrays.asList(
                         "97093236014",
