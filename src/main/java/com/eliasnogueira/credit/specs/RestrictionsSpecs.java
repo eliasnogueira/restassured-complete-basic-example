@@ -30,7 +30,7 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.apache.http.HttpStatus;
 
-public class RestrictionsSpecs {
+public final class RestrictionsSpecs {
 
     private RestrictionsSpecs() {
     }

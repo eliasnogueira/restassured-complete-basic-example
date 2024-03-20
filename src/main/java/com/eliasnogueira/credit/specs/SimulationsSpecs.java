@@ -34,7 +34,7 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.apache.http.HttpStatus;
 
-public class SimulationsSpecs {
+public final class SimulationsSpecs {
 
     private SimulationsSpecs() {}
 

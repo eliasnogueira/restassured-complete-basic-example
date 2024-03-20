@@ -27,7 +27,7 @@ import com.eliasnogueira.credit.config.ConfigurationManager;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 
-public class InitialStateSpecs {
+public final class InitialStateSpecs {
 
     private InitialStateSpecs() {
     }

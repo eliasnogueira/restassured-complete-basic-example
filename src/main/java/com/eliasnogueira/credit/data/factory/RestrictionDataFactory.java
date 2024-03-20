@@ -27,10 +27,6 @@ import net.datafaker.Faker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.security.SecureRandom;
-import java.util.Arrays;
-import java.util.List;
-
 public final class RestrictionDataFactory {
 
     private static final Faker faker = new Faker();
@@ -47,23 +43,11 @@ public final class RestrictionDataFactory {
     }
 
     public static String cpfWithRestriction() {
-        List<String> cpfWithRestriction =
-                Arrays.asList(
-                        "97093236014",
-                        "60094146012",
-                        "84809766080",
-                        "62648716050",
-                        "26276298085",
-                        "01317496094",
-                        "55856777050",
-                        "19626829001",
-                        "24094592008",
-                        "58063164083"
-                );
+        String cpfWithRestriction = faker.options().option("97093236014", "60094146012", "84809766080",
+                "62648716050", "26276298085", "01317496094", "55856777050", "19626829001", "24094592008",
+                "58063164083");
 
-        String randomCpf = cpfWithRestriction.get(new SecureRandom().nextInt(cpfWithRestriction.size()));
-
-        log.info("CPF with restriction in use: {}", randomCpf);
-        return randomCpf;
+        log.info("CPF with restriction in use: {}", cpfWithRestriction);
+        return cpfWithRestriction;
     }
 }

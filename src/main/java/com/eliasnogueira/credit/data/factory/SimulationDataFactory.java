@@ -114,7 +114,7 @@ public final class SimulationDataFactory {
 
     public static Simulation simulationWithNotValidEmail() {
         var simulationWithNotValidEmail = validSimulation();
-        simulationWithNotValidEmail.setEmail(faker.name().username() + "@" + "something");
+        simulationWithNotValidEmail.setEmail(faker.internet().username() + "@" + "something");
 
         log.info(simulationWithNotValidEmail);
         return simulationWithNotValidEmail;
@@ -133,7 +133,7 @@ public final class SimulationDataFactory {
                 new SimulationBuilder().
                         cpf(faker.cpf().valid()).
                         name(StringUtils.EMPTY).
-                        email(faker.name().username()).
+                        email(faker.internet().username()).
                         amount(new BigDecimal(faker.number().numberBetween(1, MIN_AMOUNT - 1))).
                         installments(MIN_INSTALLMENTS - 1).
                         insurance(faker.bool().bool()).
