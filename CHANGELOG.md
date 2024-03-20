@@ -4,6 +4,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.0] - 20-03-2024
+
+## Changed
+
+- Adopt Java 22
+  - Set `java.version` to 22
+  - Changed `actions/setup-java@v4` in `.github/workflows/test-execution.yml` to Java 22
+- Updated the following dependencies
+  - `maven-compiler-plugin.version -> 3.13.0`
+  - `maven-surefire-plugin.version -> 3.2.5`
+  - `maven-failsafe-plugin.version -> 3.2.5`
+  - `junit.jupiter.version -> 5.10.2`
+  - `assertj.version -> 3.25.3`
+  - `datafaker.version -> 2.1.0`
+  - `log4j.version -> 2.23.1`
+  - `slf4j.version -> 2.0.12`
+  - `allure.version -> 2.26.0`
+  - `aspectj.version -> 1.9.21.2`
+  - `commons-codec.version -> 1.16.1`
+  - `jackson-databind.version -> 2.17.0`
+
 ## [2.3.1] - 17-12-2023
 
 ## Changed
