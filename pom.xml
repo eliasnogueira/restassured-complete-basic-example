@@ -6,7 +6,7 @@
 
     <groupId>com.eliasogueira.credit</groupId>
     <artifactId>restassured-complete-basic-example</artifactId>
-    <version>2.4.0</version>
+    <version>2.4.1</version>
 
     <properties>
         <java.version>22</java.version>
@@ -17,22 +17,22 @@
         <maven-failsafe-plugin.version>3.2.5</maven-failsafe-plugin.version>
 
         <restassured.version>5.4.0</restassured.version>
-        <junit.jupiter.version>5.10.2</junit.jupiter.version>
-        <assertj.version>3.25.3</assertj.version>
-        <datafaker.version>2.1.0</datafaker.version>
+        <junit.jupiter.version>5.11.0-M2</junit.jupiter.version>
+        <assertj.version>3.26.0</assertj.version>
+        <datafaker.version>2.2.2</datafaker.version>
         <owner.version>1.0.12</owner.version>
         <log4j.version>2.23.1</log4j.version>
-        <slf4j.version>2.0.12</slf4j.version>
-        <allure.version>2.26.0</allure.version>
+        <slf4j.version>2.0.13</slf4j.version>
+        <allure.version>2.27.0</allure.version>
         <allure-maven.version>2.12.0</allure-maven.version>
-        <aspectj.version>1.9.21.2</aspectj.version>
+        <aspectj.version>1.9.22.1</aspectj.version>
         <allure.cmd.download.url>
             https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline
         </allure.cmd.download.url>
 
         <!-- Security override libraries -->
-        <commons-codec.version>1.16.1</commons-codec.version>
-        <jackson-databind.version>2.17.0</jackson-databind.version>
+        <commons-codec.version>1.17.0</commons-codec.version>
+        <jackson-databind.version>2.17.1</jackson-databind.version>
     </properties>
 
     <dependencies>
