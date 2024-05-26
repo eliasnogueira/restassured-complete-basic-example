@@ -45,24 +45,24 @@ Please, before executing any tests, run the backend API.
 After cloning this project:
 
 1. Navigate to the project folder using the Terminal / Command prompt
-2. Execute the following: `mvn spring-boot:run`
+2. Execute the following: `./mvnw spring-boot:run`
 3. Wait until you see something like this: _Application has started! Happy tests!_
 4. The API is ready and listen to all requests on `http://localhost:8088`
 
 ### Running the test suites
 
 The test suites can be run directly by your IDE or by command line.
-If you run `mvn test` all the tests will execute because it's the regular Maven lifecycle to run all the tests.
+If you run `./mvnw test` all the tests will execute because it's the regular Maven lifecycle to run all the tests.
 
 To run different suites based on the groups defined for each test you must inform the property `-Dgroups` and the group names.
 The example below shows how to run the test for each pipeline stage:
 
-| pipeline stage     | command                          |
-|--------------------|----------------------------------|
-| health check tests | `mvn test -Dgroups="health"`     |
-| contract tests     | `mvn test -Dgroups="contract"`   |
-| functional tests   | `mvn test -Dgroups="functional"` |
-| e2e tests          | `mvn test -Dgroups="e2e"`        |
+| pipeline stage     | command                             |
+|--------------------|-------------------------------------|
+| health check tests | `./mvnw test -Dgroups="health"`     |
+| contract tests     | `./mvnw test -Dgroups="contract"`   |
+| functional tests   | `./mvnw test -Dgroups="functional"` |
+| e2e tests          | `./mvnw test -Dgroups="e2e"`        |
 
 ### Generating the test report
 
@@ -72,8 +72,8 @@ There are some configuration to make it happen:
 * `allure.properties` file on `src/test/resources`
 
 You can use the command line to generate it in two ways:
-* `mvn allure:serve`: will open the HTML report into the browser
-* `mvn allure:report`: will generate the HTML port at `target/site/allure-maven-plugin` folder
+* `./mvnw allure:serve`: will open the HTML report into the browser
+* `./mvnw allure:report`: will generate the HTML port at `target/site/allure-maven-plugin` folder
 
 ## About the Project Structure
 
