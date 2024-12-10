@@ -38,6 +38,8 @@ jobs:
 
       - name: Wait for the backend service to start
         run: wget -qO- https://raw.githubusercontent.com/eficode/wait-for/2.2.4/wait-for | sh -s -- http://localhost:8088/actuator/health -t 30 -- echo "Backend is up"
+        env:
+          WAIT_FOR_VERSION: 4df3f9262d84cab0039c07bf861045fbb3c20ab7
 
       - name: Build with Maven
         run: mvn -q -B -DskipTests package --file pom.xml
