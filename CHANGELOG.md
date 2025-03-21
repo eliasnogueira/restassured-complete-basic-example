@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.0] - 21-03-2024
+
+### Changed
+
+- Adoption of Java 24
+- Updated the following dependencies
+  - `restassured -> 5.5.1`
+  - `aspectj -> 1.9.23`
+
 ## [2.4.4] - 17-12-2024
 
 ### Changed
