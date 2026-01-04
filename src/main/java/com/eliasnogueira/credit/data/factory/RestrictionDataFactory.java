@@ -36,7 +36,7 @@ public final class RestrictionDataFactory {
     }
 
     public static String cpfWithoutRestriction() {
-        String cpf = String.valueOf(faker.number().randomNumber(11, false));
+        String cpf = faker.cpf().invalid();
 
         log.info("CPF without restriction in use: {}", cpf);
         return cpf;
