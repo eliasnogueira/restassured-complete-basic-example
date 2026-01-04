@@ -24,7 +24,7 @@
 package com.eliasnogueira.credit.simulations;
 
 import com.eliasnogueira.credit.BaseAPI;
-import com.eliasnogueira.credit.commons.MessageFormat;
+import com.eliasnogueira.credit.commons.LocationUrlResolver;
 import com.eliasnogueira.credit.data.factory.SimulationDataFactory;
 import com.eliasnogueira.credit.data.provider.SimulationDataProvider;
 import com.eliasnogueira.credit.model.Simulation;
@@ -53,7 +53,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 class SimulationsFunctionalTest extends BaseAPI {
 
     /*
-     * not that, in order to assert the amount without problem, we must enable a configuration
+     * not that, to assert the amount without a problem, we must enable a configuration
      * it's located at BaseAPI class
      */
     @Test
@@ -145,7 +145,7 @@ class SimulationsFunctionalTest extends BaseAPI {
             post("/simulations/").
         then().
             statusCode(SC_CREATED).
-            header("Location", containsString(MessageFormat.locationURLByEnvironment()));
+            header("Location", containsString(LocationUrlResolver.locationURLByEnvironment()));
     }
 
     @Tag(FUNCTIONAL)
