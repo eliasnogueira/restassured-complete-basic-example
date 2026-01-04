@@ -25,7 +25,7 @@ package com.eliasnogueira.credit.specs;
 
 import static org.hamcrest.CoreMatchers.startsWith;
 
-import com.eliasnogueira.credit.commons.MessageFormat;
+import com.eliasnogueira.credit.commons.LocationUrlResolver;
 import com.eliasnogueira.credit.data.factory.SimulationDataFactory;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -51,7 +51,7 @@ public final class SimulationsSpecs {
     public static ResponseSpecification createdSimulation() {
         return new ResponseSpecBuilder().
             expectStatusCode(HttpStatus.SC_CREATED).
-            expectHeader("Location", startsWith(MessageFormat.locationURLByEnvironment())).
+            expectHeader("Location", startsWith(LocationUrlResolver.locationURLByEnvironment())).
             build();
     }
 }
