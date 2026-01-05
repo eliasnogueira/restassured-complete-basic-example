@@ -30,14 +30,14 @@ import org.apache.logging.log4j.Logger;
 
 import static java.text.MessageFormat.format;
 
-public class MessageFormat {
+public class LocationUrlResolver {
 
-    private static final Logger log = LogManager.getLogger(MessageFormat.class);
+    private static final Logger log = LogManager.getLogger(LocationUrlResolver.class);
 
-    private MessageFormat() {}
+    private LocationUrlResolver() {}
     /*
      * This method was created to remove the post if is a test environment because the 443 port must be informed
-     * to make the requests, but should not be show in the URL
+     * to make the requests, but should not be shown in the URL
      */
     public static String locationURLByEnvironment() {
         String locationURL;

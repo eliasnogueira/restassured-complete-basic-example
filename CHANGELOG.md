@@ -5,12 +5,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.7.0] - 04-01-2026
+
+### Changed
+
+- Adoption of Java 25
+  - Set `java.version` to 25
+  - Changed `actions/setup-java@v4` in `.github/workflows/test-execution.yml` to Java 25
+- Renamed `MessageFormat` to `LocationUrlResolver` and updated usages
+- Updated CPF generation to avoid deprecated DataFaker API
+- Updated the following dependencies
+  - `maven-compiler-plugin.version -> 3.14.1`
+  - `maven-surefire-plugin.version -> 3.5.4`
+  - `restassured.version -> 6.0.0`
+  - `junit.jupiter.version -> 6.0.1`
+  - `assertj.version -> 3.27.6`
+  - `datafaker.version -> 2.5.3`
+  - `log4j.version -> 2.25.3`
+  - `slf4j.version -> 2.0.17`
+  - `allure.version -> 2.32.0`
+  - `allure-maven.version -> 2.17.0`
+  - `aspectj.version -> 1.9.25.1`
+  - `commons-codec.version -> 1.20.0`
+  - `jackson-databind.version -> 3.0.3`
+  - `rhino.version -> 1.9.0`
+- Added `junit-platform-launcher` (test scope)
+- Removed `allure-testng`
+
 ## [2.6.0] - 21-03-2024
 
 ### Changed
 
 - Updated the following dependencies
-  - `maven-surefire-plugin -> 3.5.3`
+    - `maven-surefire-plugin -> 3.5.3`
 
 ## [2.5.0] - 21-03-2024
 
@@ -18,8 +45,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Adoption of Java 24
 - Updated the following dependencies
-  - `restassured -> 5.5.1`
-  - `aspectj -> 1.9.23`
+    - `restassured -> 5.5.1`
+    - `aspectj -> 1.9.23`
 
 ## [2.4.4] - 17-12-2024
 
