@@ -25,14 +25,17 @@ package com.eliasnogueira.credit.e2e;
 
 import com.eliasnogueira.credit.client.RestrictionsClient;
 import com.eliasnogueira.credit.client.SimulationsClient;
+import com.eliasnogueira.credit.extensions.EnvironmentAvailabilityExtension;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static com.eliasnogueira.credit.data.changeless.TestSuiteTags.E2E;
 import static org.apache.http.HttpStatus.SC_NOT_FOUND;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@ExtendWith(EnvironmentAvailabilityExtension.class)
 class FullSimulationE2ETest {
 
     private final RestrictionsClient restrictionsClient = new RestrictionsClient();
