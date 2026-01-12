@@ -44,9 +44,6 @@ jobs:
       - name: Build with Maven
         run: mvn -q -B -DskipTests package --file pom.xml
 
-      - name: Run Health Check Tests
-        run: mvn -q -B test -Dgroups="health"
-
       - name: Run Contract Tests
         run: mvn -q -B test -Dgroups="contract"
 

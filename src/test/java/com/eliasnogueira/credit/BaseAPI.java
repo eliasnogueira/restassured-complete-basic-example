@@ -25,12 +25,14 @@ package com.eliasnogueira.credit;
 
 import com.eliasnogueira.credit.config.Configuration;
 import com.eliasnogueira.credit.config.ConfigurationManager;
+import com.eliasnogueira.credit.extensions.EnvironmentAvailabilityExtension;
 import io.restassured.RestAssured;
 import io.restassured.config.SSLConfig;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.path.json.config.JsonPathConfig.NumberReturnType;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static io.restassured.RestAssured.basePath;
 import static io.restassured.RestAssured.baseURI;
@@ -39,6 +41,7 @@ import static io.restassured.RestAssured.port;
 import static io.restassured.config.JsonConfig.jsonConfig;
 import static io.restassured.config.RestAssuredConfig.newConfig;
 
+@ExtendWith(EnvironmentAvailabilityExtension.class)
 public abstract class BaseAPI {
 
     protected static Configuration configuration;
