@@ -5,6 +5,37 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.9.0] - 24-08-2026
+
+### Added
+
+- Added `@NonNull` to the `EnvironmentAvailabilityExtension` JUnit callback context.
+- Added troubleshooting and target-environment configuration guidance to the README.
+
+### Changed
+
+- Updated the Maven Wrapper to version `3.3.4`.
+- Updated the Maven distribution from `3.9.9` to `3.9.16`.
+- Updated GitHub Actions dependencies:
+    - `actions/checkout` from `v4` to `v7`
+    - `actions/setup-java` from `v4` to `v6`
+    - `actions/cache` from `v4` to `v6`
+- Updated the following dependencies:
+    - `maven-surefire-plugin.version -> 3.5.6`
+    - `restassured.version -> 6.0.1`
+    - `junit.jupiter.version -> 6.1.3`
+    - `datafaker.version -> 2.7.0`
+    - `log4j.version -> 2.26.1`
+    - `slf4j.version -> 2.0.18`
+    - `allure.version -> 2.35.4`
+    - `allure-maven.version -> 3.0.3`
+    - `commons-codec.version -> 1.22.1`
+    - `jackson-databind.version -> 2.22.2`
+
+### Removed
+
+- Removed the unused `maven-failsafe-plugin.version` property from the Maven configuration.
+
 ## [2.8.0] - 12-01-2026
 
 ### Added
@@ -321,4 +352,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added libraries
     - assertj
     - slf4j
-   

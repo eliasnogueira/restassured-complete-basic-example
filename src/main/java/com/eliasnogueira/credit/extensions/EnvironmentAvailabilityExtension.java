@@ -28,6 +28,7 @@ import io.restassured.RestAssured;
 import org.apache.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jspecify.annotations.NonNull;
 import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
@@ -41,7 +42,7 @@ public class EnvironmentAvailabilityExtension implements BeforeAllCallback {
     private static final Logger log = LogManager.getLogger(EnvironmentAvailabilityExtension.class);
 
     @Override
-    public void beforeAll(ExtensionContext context) {
+    public void beforeAll(@NonNull ExtensionContext context) {
         if (isEnvironmentReady == null) checkEnvironmentHealth();
 
         Assumptions.assumeTrue(isEnvironmentReady, "Environment is not available.");

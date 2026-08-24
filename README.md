@@ -15,28 +15,27 @@ Remember to give this project a ⭐
 * [Pipeline](#pipeline)
 * [Do you want to help?](#do-you-want-to-help)
 
-This project was created to start the initial steps with test automation for a REST API using RESTAssured.
+This project was created to demonstrate the initial steps of REST API test automation using REST-Assured.
 It tests the API: [credit-api](https://github.com/eliasnogueira/credit-api)
 
 > :warning: **Disclaimer**
 >
-> This project has an educational goal and does not have the best practices that could be applied
+> This project has an educational goal and is intentionally kept small. It demonstrates common API testing patterns,
+> but production projects may require additional isolation, security, and reporting practices.
 >
-> Some practices will help you to improve your test architecture, but the central point of this repository and
-> demonstrate an example of running tests for API in a pipeline
-> some practices will help you to improve your test architecture,
-> but the central point of this repository and demonstrate an example of running tests for API in a pipeline
+> The main goal is to demonstrate an API test architecture and run the tests in a CI pipeline.
 
 ## Required software
 
 * Java JDK 25
 * Clone/download the backend API [credit-api](https://github.com/eliasnogueira/credit-api)
 
+The project includes the Maven Wrapper, so Maven does not need to be installed separately.
+
 ## How to execute the tests
 
-You can open each test class on `src\test\java` and execute all of them, but I recommend you run it by the
-command line. It enables us to run in different test execution strategies and, also in a pipeline, that is the repo
-purpose.
+You can run the tests from an IDE or from the command line. The command-line approach also makes it easy to select
+different test groups locally and in CI.
 
 ### Running the backend API
 
@@ -46,7 +45,7 @@ After cloning the [credit-api](https://github.com/eliasnogueira/credit-api) proj
 1. Navigate to the project folder using the Terminal / Command prompt
 2. Execute the following: `./mvnw spring-boot:run`
 3. Wait until you see something like this: _Application has started! Happy tests!_
-4. The API is ready and listen to all requests on `http://localhost:8088`
+4. The API is ready to receive requests at `http://localhost:8088`
 
 ### Running the test suites
 
@@ -74,7 +73,7 @@ There is some configuration to make it happen:
 You can use the command line to generate it in two ways:
 
 * `./mvnw allure:serve`: will open the HTML report into the browser
-* `./mvnw allure:report`: will generate the HTML port at `target/site/allure-maven-plugin` folder
+* `./mvnw allure:report`: generates the HTML report in `target/site/allure-maven-plugin`
 
 ## About the Project Structure
 
@@ -82,18 +81,16 @@ You can use the command line to generate it in two ways:
 
 #### client
 
-Classes that do some actions in their endpoints. It's used my the `FullSimulationE2ETest` to demonstrate and e2e
-scenario.
+Classes that encapsulate endpoint actions. They are used by `FullSimulationE2ETest` to demonstrate an E2E scenario.
 
 #### commons
 
-It contains a class where will format the URL expected when we create a new resource in the `simulation` endpoint.
-You can add any class that can be used in the project.
+Contains shared helpers, such as the URL resolver used to validate the `Location` header returned when a simulation
+is created.
 
 #### config
 
-The class `Configuration` is the connections between the property file `api.properties` located in
-`src/test/resources/`.
+`Configuration` maps the properties in `src/test/resources/api.properties` to typed accessors.
 
 The `@Config.Sources` load the properties file and match the attributes with the `@Key`, so you automatically have the
 value.
@@ -108,8 +105,8 @@ The second will load the `api.properties` file from the classpath.
         "classpath:api.properties"})
 ```
 
-The environment variable is read on the `ConfiguratorManager`.
-This class reduces the amount of code necessary to get any information on the properties file.
+System properties take precedence over the classpath defaults, which makes the configuration suitable for CI and
+different environments. `ConfigurationManager` provides a single access point to the configuration.
 
 This strategy uses the [Owner](https://matteobaccan.github.io/owner/) library
 
@@ -117,11 +114,11 @@ This strategy uses the [Owner](https://matteobaccan.github.io/owner/) library
 
 ##### changeless
 
-It contains a class having the data related to the test groups and constants.
+Contains test-group names, endpoint paths, and validation error constants.
 
 ##### factory
 
-Test Data Factory classes using [data-faker](https://www.datafaker.net/) to generate fake data.
+Test Data Factory classes use [DataFaker](https://www.datafaker.net/) to generate test data.
 
 In a few cases, there are custom data like:
 
@@ -135,72 +132,63 @@ JUnit 5 Arguments to reduce the amount of code and maintenance for the functiona
 
 #### model
 
-Model and Builder class to
-[mapping objects thought serialization and deserialization](https://github.com/rest-assured/rest-assured/wiki/Usage#object-mapping)
-in use with Rest-Assured.
+Model and Builder classes used for
+[serialization and deserialization](https://github.com/rest-assured/rest-assured/wiki/Usage#object-mapping)
+with REST-Assured.
 
 #### specs
 
 Request and Response specifications used by the clients and e2e tests.
-The class `InitialStepsSpec` set the basePath, baseURI, and port for the custom specs.
-The classes `RestrictionsSpecs` and `SimulationsSpecs` contains the implementation of request and response
-specifications.
+`InitialStateSpecs` sets the base URI, base path, and port for request specifications. `RestrictionsSpecs` and
+`SimulationsSpecs` define reusable request and response specifications.
 
 ### src/test/java
 
 #### e2e
 
-End-to-End test using both endpoints to simulate the user journey thought the API.
-
-#### general
-
-Health check test to ensure the endpoint is available.
+End-to-End test using both endpoints to simulate a user journey through the API.
 
 #### restrictions
 
-Contract and Functional tests to the Restriction endpoint.
+Contract and functional tests for the restrictions endpoint.
 
 #### simulations
 
-Contract and Functional tests to the Simulations endpoint
+Contract and functional tests for the simulations endpoint.
 
 ### src/test/resources
 
-It has a `schemas` folder with the JSON Schemas to enable Contract Testing using Rest-Assured. Also, the properties file
-to easily configure the API URI.
+Contains JSON schemas used by the contract tests and the API configuration file.
 
 ## Libraries
 
-* [RESTAssured](http://rest-assured.io/) library to test REST APIs
-* [JUnit 5](https://junit.org/junit5/) to support the test creation
+* [REST-Assured](http://rest-assured.io/) for testing REST APIs
+* [JUnit 5](https://junit.org/junit5/) for writing and running tests
 * [Owner](https://matteobaccan.github.io/owner/) to manage the property files
-* [data-faker](https://www.datafaker.net/) to generate fake data
-* [Log4J2](https://logging.apache.org/log4j/2.x/) as the logging strategy
-* [Allure Report](https://docs.qameta.io/allure/) as the testing report strategy
+* [DataFaker](https://www.datafaker.net/) to generate test data
+* [Log4j 2](https://logging.apache.org/log4j/2.x/) for logging
+* [Allure Report](https://docs.qameta.io/allure/) for test reporting
 
 ## Patterns applied
 
 * Test Data Factory
 * Data Provider
 * Builder
-* Request and Response Specification
-* Base Test
+* Request and response specification
+* Base test
 
 ## Pipeline
 
-This project uses [GitHub Actions](https://github.com/features/actions) to run the all the tests in a pipeline.
-You can find it
-at https://github.com/eliasnogueira/restassured-complete-basic-example/blob/master/.github/workflows/test-execution.yml
+This project uses [GitHub Actions](https://github.com/features/actions) to run the tests in a pipeline. The workflow
+is available at `.github/workflows/test-execution.yml`.
 
 We have the following pipeline steps:
 
 ```
-build -> contract -> e2e -> funcional 
+build -> contract -> e2e -> functional
 ```
 
-Except the build, that is the traditional Maven build, the other stages has some parameters to determine the test type
-and the SUT (System Under Test).
-The parameters are:
+The tests support these system properties for selecting a target environment:
 
 * `-Dgroups`: specify which test type will be executed
 * `-Dapi.base.uri`: specify a new base URI
@@ -208,8 +196,27 @@ The parameters are:
 * `-Dapi.port`: specify a new port
 * `-Dapi.health.context`: specify a new health context
 
-All the parameters, except the `-Dgroups` are pointing to Heroku because we can't run it locally.
-It's a great example of how you can set different attribute values to run your tests.
+The default target is the local API at `http://localhost:8088/api/v1`. Override these properties when running against
+another environment, for example:
+
+```shell
+./mvnw test -Dgroups=functional \
+  -Dapi.base.uri=https://example.test \
+  -Dapi.base.path=/api/v1 \
+  -Dapi.port=443
+```
+
+The GitHub Actions workflow starts the backend service configured in the workflow. The environment availability
+extension checks `api.health.context/health` before running API tests and skips the suite when the target is
+unavailable.
+
+## Troubleshooting
+
+* If tests are skipped with `Environment is not available`, verify that the backend is running and that the configured
+  URI, port, and health context resolve to a healthy endpoint.
+* If port `8088` is already in use, stop the conflicting process or override `api.port` for both the backend and tests.
+* If Allure commands are unavailable, run `./mvnw allure:report` first; the Maven plugin downloads the matching
+  Allure command-line distribution.
 
 ## Do you want to help?
 
