@@ -31,7 +31,7 @@
 
         <!-- override vulnerable dependencies -->
         <commons-codec.version>1.22.1</commons-codec.version>
-        <jackson-databind.version>2.22.2</jackson-databind.version>
+        <jackson-databind.version>2.22.3</jackson-databind.version>
         <rhino.version>1.9.1</rhino.version>
     </properties>
 
